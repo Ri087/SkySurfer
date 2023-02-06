@@ -7,8 +7,8 @@ namespace SkyRunner
     {
         static void Main(string[] args)
         {
-            // Create the window
-            RenderWindow window = new RenderWindow(new VideoMode(800, 500), "My game");
+            // Create the window (mode: Borderless Windowed)
+            RenderWindow window = new RenderWindow(VideoMode.DesktopMode, "Sky Surfer", Styles.None);
 
             // Run the game loop
             while (window.IsOpen)
