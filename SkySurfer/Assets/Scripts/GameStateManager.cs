@@ -12,7 +12,7 @@ namespace SkySurfer.Assets.Scripts
         private static GameStateManager _instance = new();
         private GameBaseState _currentState = null;
         private MainMenuGameState _mainMenuGameState = new();
-        //private PlayGameState _playGameState = new();
+        private PlayGameState _playGameState = new();
         private Stack<GameBaseState> _states = new();
 
         public GameStateManager()
