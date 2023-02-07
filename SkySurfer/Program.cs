@@ -1,28 +1,31 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using SkySurfer.Assets.Scripts;
 
 namespace SkyRunner
 {
-    class Game
+    class Display
     {
         static void Main(string[] args)
         {
-            // Create the window (mode: Borderless Windowed)
             RenderWindow window = new RenderWindow(VideoMode.DesktopMode, "Sky Surfer", Styles.None);
+            window.SetFramerateLimit(60);
 
-            // Run the game loop
+            GameStateManager.GetInstance().GetStates().Peek().Init();
+
             while (window.IsOpen)
             {
-                // Handle events
                 window.DispatchEvents();
 
-                // Update the game
-
-                // Draw the game
                 window.Clear();
 
-                // ... draw your game here ...
+                GameStateManager.GetInstance().GetStates().Peek().Update(0f);
+                GameStateManager.GetInstance().GetStates().Peek().Draw(window);
+
                 window.Display();
+
+                // Ferme la fenêtre
+                // window.Close();
             }
         }
     }
