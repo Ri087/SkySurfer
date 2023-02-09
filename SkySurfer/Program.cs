@@ -25,8 +25,6 @@ namespace SkyRunner
 
                 window.Clear();
 
-
-                Console.WriteLine(deltaTime);
                 GameStateManager.GetInstance().GetStates().Peek().Update(deltaTime);
                 GameStateManager.GetInstance().GetStates().Peek().Draw(window);
 
