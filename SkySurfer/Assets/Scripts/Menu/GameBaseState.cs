@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkySurfer.Assets.Scripts
+namespace SkySurfer.Assets.Scripts.Menu
 {
     public abstract class GameBaseState
     {

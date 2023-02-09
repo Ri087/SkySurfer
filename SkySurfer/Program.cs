@@ -8,7 +8,9 @@ namespace SkyRunner
     {
         static void Main(string[] args)
         {
-            RenderWindow window = new RenderWindow(VideoMode.DesktopMode, "Sky Surfer", Styles.None);
+            //RenderWindow window = new RenderWindow(VideoMode.DesktopMode, "Sky Surfer", Styles.None);
+            RenderWindow window = new RenderWindow(new VideoMode(800, 600), "Sky Surfer", Styles.None);
+
             window.SetFramerateLimit(60);
 
             GameStateManager.GetInstance().GetStates().Peek().Init();
