@@ -77,7 +77,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         }
         private void MenuSelector(Object sender , KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down)
+            if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down && e.Code != Keyboard.Key.Enter)
             {
                 return;
             }
@@ -103,6 +103,11 @@ namespace SkySurfer.Assets.Scripts.Menu
             if (e.Code == Keyboard.Key.Down && selected < menu.Length - 1)
             {
                 selected++;
+                return;
+            }
+            if (e.Code == Keyboard.Key.Enter)
+            {
+                Console.WriteLine("Changer de state");
                 return;
             }
         }
