@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using SkyRunner;
 using SkySurfer.Assets.Scripts.Menu.Class;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     class MainMenuGameState : GameBaseState
     {
+
+        private RenderWindow window;
         private int selected = 0;
         private Color selectedColor = Color.Green;
         private Font font = new("../../../Assets/Fonts/Balbek-Personal.otf");
@@ -32,6 +35,7 @@ namespace SkySurfer.Assets.Scripts.Menu
                 TextPrint(window, menu[i], i, windowX, windowY);
             }
         }
+        
         public override void Cleanup()
         {
 
@@ -39,7 +43,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Exit()
         {
-
+            window.KeyPressed -= MenuSelector;
         }
 
         public override void HandleInput()
@@ -47,8 +51,10 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init()
+        public override void Init(RenderWindow window)
         {
+            window.KeyPressed += MenuSelector;
+
         }
 
         public override void Update(float deltaTime)
@@ -68,6 +74,37 @@ namespace SkySurfer.Assets.Scripts.Menu
                 windowText.FillColor = info.color;
             }
             window.Draw(windowText);
+        }
+        private void MenuSelector(Object sender , KeyEventArgs e)
+        {
+            if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down)
+            {
+                return;
+            }
+
+            if (e.Code == Keyboard.Key.Up && selected == 0)
+            {
+                selected = menu.Length - 1;
+                return;
+            }
+
+            if (e.Code == Keyboard.Key.Up && selected > 0)
+            {
+                selected--;
+                return;
+            }
+
+            if (e.Code == Keyboard.Key.Down && selected == menu.Length - 1)
+            {
+                selected = 0;
+                return;
+            }
+
+            if (e.Code == Keyboard.Key.Down && selected < menu.Length - 1)
+            {
+                selected++;
+                return;
+            }
         }
     }
 }

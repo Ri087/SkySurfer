@@ -9,6 +9,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     class CreditGameState : GameBaseState
     {
+        RenderWindow window;
         public override void Cleanup()
         {
 
@@ -29,7 +30,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init()
+        public override void Init(RenderWindow window)
         {
             Console.WriteLine("Credits  init");
         }
