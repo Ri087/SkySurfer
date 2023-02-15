@@ -77,20 +77,24 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             // Reduce fly speed by little when at top or at bottom
             if (_player.GetPositionY() <= _player._maxHeightPosition)
             {
+                // To decrease momentum
                 if (_flyingSpeed > 0)
                 {
                     _flyingSpeed -= deltaTime*2.5f;
                 } 
+                // Prevent to much momemtum decrease
                 if (_flyingSpeed < 0)
                 {
                     _flyingSpeed = 0;
                 }
             } else if (_player.GetPositionY() >= _player._minHeightPosition)
             {
+                // To decrease momentum
                 if (_flyingSpeed < 0)
                 {
                     _flyingSpeed += deltaTime*2.5f;
-                } 
+                }
+                // Prevent to much momemtum decrease
                 if (_flyingSpeed > 0)
                 {
                     _flyingSpeed = 0;
