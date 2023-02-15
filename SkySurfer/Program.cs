@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using SkySurfer.Assets.Scripts;
+using SkySurfer.Assets.Scripts.Entities;
 
 namespace SkyRunner
 {

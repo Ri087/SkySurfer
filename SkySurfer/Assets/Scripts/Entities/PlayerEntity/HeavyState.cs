@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 {
     class HeavyState : PlayerBaseState
     {
+        private Player _player;
         public override void Cleanup()
         {
 
@@ -16,7 +18,14 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         public override void Draw(RenderWindow window)
         {
+            float windowX = window.Size.X;
+            float windowY = window.Size.Y;
 
+            // Player of the game
+            RectangleShape player = new(new Vector2f(windowX * 0.06f, windowY * 0.1f));
+            player.FillColor = Color.Red;
+            player.Position = new(window.Size.X * 0.1f, window.Size.Y * _player.GetPositionY());
+            window.Draw(player);
         }
 
         public override void Exit()
@@ -29,14 +38,25 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         }
 
-        public override void Init()
+        public override void Init(Player player)
         {
-            Console.WriteLine("Heavy state init");
+            Console.WriteLine("ma mere la pute");
+            _player = player;
+            _player.SetPowerUpTime(15); // Not a powerup state
+            _player.SetHp(2); // 1 HP max
+            _player.SetAttackSpeed(1.5f); // 1 Attack speed
+            _player.SetLastAttack(0); // Reset attack timer (formula 1/AS)
+            _player.SetGravity(0); // Reset gravity
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(float deltaTime, float velocity)
         {
-
+            _player.SetLastAttack(_player.GetLastAttack() + deltaTime);
+            _player.SetPowerUpTime(_player.GetPowerUpTime() - deltaTime);
+            if (_player.GetPowerUpTime() <= 0)
+            {
+                // Switch states
+            }
         }
     }
 }
