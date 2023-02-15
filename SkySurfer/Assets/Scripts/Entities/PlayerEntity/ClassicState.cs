@@ -13,7 +13,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
     {
         private Player _player;
         private float _flyingSpeed;
-        private float _flyingSpeedMax = 0.5f;
+        private readonly float _flyingSpeedMax = 0.5f;
         private bool _flying;
         public override void Cleanup()
         {
@@ -56,8 +56,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             _player.SetPowerUpTime(0); // Not a powerup state
             _player.SetHp(1); // 1 HP max
             _player.SetJump(0); // 0 means that he can fly
-            _player.SetAttackSpeed(1); // 1 Attack speed
-            _player.SetLastAttack(0); // Reset attack timer (formula 1/AS)
+            _player.SetAttackSpeed(2.5f); // 1 Attack speed
+            _player.SetLastAttack(0); // Reset attack timer
             _player.SetInvulnerableTime(0); // Not invulnerable anymore
             _player.SetGravity(0); // Reset gravity
 
@@ -140,6 +140,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private void Shoot(Object? sender, KeyEventArgs e)
         {
             if (e.Code != SettingsManager.GetIntances().GetShotKey()) return;
+            if (1 / _player.GetAttackSpeed() > _player.GetLastAttack()) return;
+            _player.SetLastAttack(0);
             Console.WriteLine("Shoot");
         }
     }
