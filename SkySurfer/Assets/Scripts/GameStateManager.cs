@@ -10,11 +10,13 @@ namespace SkySurfer.Assets.Scripts
 {
     public class GameStateManager
     {
-        private RenderWindow window;
+        private RenderWindow? window;
         private static GameStateManager _instance = new();
         private GameBaseState _currentState = null;
         private MainMenuGameState _mainMenuGameState = new();
         private PlayGameState _playGameState = new();
+        private SettingsGameState _SettingsGameState = new();
+        private CreditsGameState _CreditsGameState = new();  
         private Stack<GameBaseState> _states = new();
 
         public GameStateManager()
@@ -44,17 +46,44 @@ namespace SkySurfer.Assets.Scripts
         {
             return _playGameState;
         }
+        public GameBaseState GetSettingsGameState()
+        {
+            return _SettingsGameState;
+        }
+        public GameBaseState GetCreditsGameState() 
+        {
+            return _CreditsGameState;
+        }
 
         public Stack<GameBaseState> GetStates()
         {
             return _states;
         }
-
         public void SwitchState(GameBaseState state)
         {
             _states.Pop();
             _states.Push(state);
-            _states.Peek().Init(window);
+            _states.Peek().Init();
         }
+
+        public void AddState(GameBaseState state)
+        {
+            _states.Push(state);
+            _states.Peek().Init();
+        }
+        public void ReturnState()
+        {
+            _states.Pop();
+            _states.Peek().Init();
+        }
+
+        public void SetWindow(RenderWindow window)
+        {
+            this.window = window;  
+        }
+        public RenderWindow GetWindow() {
+            return window;        
+        }
+        
     }
 }

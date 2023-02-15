@@ -9,7 +9,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     internal class PauseMenuGameState : GameBaseState
     {
-        private RenderWindow window;
+        private RenderWindow? window;
         public override void Cleanup()
         {
             //   throw new NotImplementedException();
@@ -30,8 +30,10 @@ namespace SkySurfer.Assets.Scripts.Menu
             //    throw new NotImplementedException();
         }
 
-        public override void Init(RenderWindow window)
+        public override void Init()
         {
+            this.window = GameStateManager.GetInstance().GetWindow();
+
             //    throw new NotImplementedException();
         }
 

@@ -15,8 +15,8 @@ namespace SkyRunner
             window.SetFramerateLimit(60);
             Clock clock = new Clock();
             float deltaTime = clock.Restart().AsSeconds();
-
-            GameStateManager.GetInstance().GetStates().Peek().Init(window);
+            GameStateManager.GetInstance().SetWindow(window);
+            GameStateManager.GetInstance().GetStates().Peek().Init();
 
             while (window.IsOpen)
             {

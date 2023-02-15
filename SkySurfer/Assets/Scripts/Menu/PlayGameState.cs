@@ -9,7 +9,8 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     class PlayGameState : GameBaseState
     {
-        RenderWindow window;
+        
+        private RenderWindow? window;
         public override void Cleanup()
         {
 
@@ -30,8 +31,10 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init(RenderWindow window)
+        public override void Init()
         {
+            this.window = GameStateManager.GetInstance().GetWindow();
+
             Console.WriteLine("Play game init");
         }
 
