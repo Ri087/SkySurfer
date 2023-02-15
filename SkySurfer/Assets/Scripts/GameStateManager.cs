@@ -10,7 +10,6 @@ namespace SkySurfer.Assets.Scripts
 {
     public class GameStateManager
     {
-        private RenderWindow window;
         private static GameStateManager _instance = new();
         private MainMenuGameState _mainMenuGameState = new();
         private PlayGameState _playGameState = new();
@@ -49,7 +48,7 @@ namespace SkySurfer.Assets.Scripts
         {
             _states.Pop();
             _states.Push(state);
-            _states.Peek().Init(window);
+            _states.Peek().Init();
         }
     }
 }

@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 
 namespace SkySurfer.Assets.Scripts.Menu
 {
-    internal class LooseMenuGameState : GameBaseState
+    class LooseMenuGameState : GameBaseState
     {
-
-        private RenderWindow window;
-
         public override void Cleanup()
         {
             //throw new NotImplementedException();
         }
 
-        public override void Draw(RenderWindow window)
+        public override void Draw()
         {
             //throw new NotImplementedException();
         }
@@ -32,7 +29,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             //throw new NotImplementedException();
         }
 
-        public override void Init(RenderWindow window)
+        public override void Init()
         {
             //throw new NotImplementedException();
         }

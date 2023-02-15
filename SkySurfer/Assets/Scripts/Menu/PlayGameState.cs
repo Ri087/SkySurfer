@@ -28,30 +28,30 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Draw(RenderWindow window)
+        public override void Draw()
         {
-            float windowX = window.Size.X;
-            float windowY = window.Size.Y;
+            float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
+            float windowY = SettingsManager.GetIntances().GetWindow().Size.Y;
 
             // Roof of the game
             RectangleShape roof = new(new Vector2f(windowX, windowY * containerLength));
             roof.FillColor = roofColor;
-            window.Draw(roof);
+            SettingsManager.GetIntances().GetWindow().Draw(roof);
 
             // Floor of the game
             RectangleShape floor = new(new Vector2f(windowX, windowY * containerLength));
             floor.Position = new(0, windowY * (1 - containerLength));
             floor.FillColor = floorColor;
-            window.Draw(floor);
+            SettingsManager.GetIntances().GetWindow().Draw(floor);
 
             // Background of the game
             RectangleShape background = new(new Vector2f(windowX, windowY * (1 - (2 * containerLength))));
             background.Position = new(0, windowY * containerLength);
             background.FillColor = backgroundColor;
-            window.Draw(background);
+            SettingsManager.GetIntances().GetWindow().Draw(background);
 
             // Player of the game
-            PlayerStateManager.GetInstance().GetStates().Peek().Draw(window);
+            PlayerStateManager.GetInstance().GetStates().Peek().Draw();
         }
 
         public override void Exit()
@@ -64,7 +64,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init(RenderWindow window)
+        public override void Init()
         {
 
         }

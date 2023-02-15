@@ -13,7 +13,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public abstract void Exit();
         public abstract void Cleanup();
         public abstract void Update(float deltaTime, float velocity);
-        public abstract void Draw(RenderWindow window);
+        public abstract void Draw();
         public abstract void HandleInput();
     }
 }

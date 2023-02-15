@@ -13,8 +13,6 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     class MainMenuGameState : GameBaseState
     {
-
-        private RenderWindow window;
         private int selected = 0;
         private Color selectedColor = Color.Green;
         private Font font = new("../../../Assets/Fonts/Balbek-Personal.otf");
@@ -25,14 +23,14 @@ namespace SkySurfer.Assets.Scripts.Menu
                 new(text: "Credits", x: 0.15f, y: 0.40f),
                 new(text: "Exit", x: 0.15f, y: 0.80f),
             };
-        public override void Draw(RenderWindow window)
+        public override void Draw()
         {
-            float windowX = window.Size.X;
-            float windowY = window.Size.Y;
+            float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
+            float windowY = SettingsManager.GetIntances().GetWindow().Size.Y;
 
             for (int i = 0; i < menu.Length; i++)
             {
-                TextPrint(window, menu[i], i, windowX, windowY);
+                TextPrint(menu[i], i, windowX, windowY);
             }
         }
         
@@ -43,7 +41,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Exit()
         {
-            window.KeyPressed -= MenuSelector;
+            SettingsManager.GetIntances().GetWindow().KeyPressed -= MenuSelector;
         }
 
         public override void HandleInput()
@@ -51,9 +49,9 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init(RenderWindow window)
+        public override void Init()
         {
-            window.KeyPressed += MenuSelector;
+            SettingsManager.GetIntances().GetWindow().KeyPressed += MenuSelector;
 
         }
 
@@ -62,7 +60,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        private void TextPrint(RenderWindow window, MainMenu info, int i, float windowX, float windowY)
+        private void TextPrint(MainMenu info, int i, float windowX, float windowY)
         {
             Text windowText = new(info.text, font, info.size);
             windowText.Position = new(info.x * windowX, info.y * windowY);
@@ -73,7 +71,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             {
                 windowText.FillColor = info.color;
             }
-            window.Draw(windowText);
+            SettingsManager.GetIntances().GetWindow().Draw(windowText);
         }
         private void MenuSelector(Object sender , KeyEventArgs e)
         {

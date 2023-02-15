@@ -10,26 +10,24 @@ namespace SkyRunner
     {
         static void Main(string[] args)
         {
+            SettingsManager.GetIntances();
 
-
-            RenderWindow window = new RenderWindow(new VideoMode(800, 600), "Sky Surfer", Styles.None);
-            window.SetFramerateLimit(60);
             Clock clock = new Clock();
             float deltaTime = clock.Restart().AsSeconds();
 
-            GameStateManager.GetInstance().GetStates().Peek().Init(window);
+            GameStateManager.GetInstance().GetStates().Peek().Init();
 
-            while (window.IsOpen)
+            while (SettingsManager.GetIntances().GetWindow().IsOpen)
             {
 
-                window.DispatchEvents();
+                SettingsManager.GetIntances().GetWindow().DispatchEvents();
 
-                window.Clear();
+                SettingsManager.GetIntances().GetWindow().Clear();
 
                 GameStateManager.GetInstance().GetStates().Peek().Update(deltaTime);
-                GameStateManager.GetInstance().GetStates().Peek().Draw(window);
+                GameStateManager.GetInstance().GetStates().Peek().Draw();
 
-                window.Display();
+                SettingsManager.GetIntances().GetWindow().Display();
 
                 deltaTime = clock.Restart().AsSeconds();
 

@@ -15,7 +15,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Draw(RenderWindow window)
+        public override void Draw()
         {
 
         }
@@ -30,7 +30,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init(RenderWindow window)
+        public override void Init()
         {
             Console.WriteLine("Setting menu init");
         }
