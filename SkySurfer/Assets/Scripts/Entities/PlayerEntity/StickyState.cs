@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 {
     class StickyState : PlayerBaseState
     {
+        private Player _player;
         public override void Cleanup()
         {
 
@@ -16,7 +18,14 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         public override void Draw(RenderWindow window)
         {
+            float windowX = window.Size.X;
+            float windowY = window.Size.Y;
 
+            // Player of the game
+            RectangleShape player = new(new Vector2f(windowX * 0.06f, windowY * 0.1f));
+            player.FillColor = Color.Green;
+            player.Position = new(window.Size.X * 0.1f, window.Size.Y * _player.GetPositionY());
+            window.Draw(player);
         }
 
         public override void Exit()
@@ -29,14 +38,19 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         }
 
-        public override void Init()
+        public override void Init(Player player)
         {
-            Console.WriteLine("Sticky state init");
+            _player = player;
+            _player.SetPowerUpTime(15); // Not a powerup state
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(float deltaTime, float velocity)
         {
-
+            _player.SetPowerUpTime(_player.GetPowerUpTime() - deltaTime);
+            if (_player.GetPowerUpTime() <= 0)
+            {
+                // Switch states
+            }
         }
     }
 }

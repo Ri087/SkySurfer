@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 {
-    class Player
+    public class Player
     {
         private float _powerUpTime;
         private int _hp;
         private int _jump;
         private float _attackSpeed;
+        private float _lastAttack;
         private float _invulnerableTime;
         private int _gravity;
+        private float _positionY = 0.8f;
 
         public float GetPowerUpTime()
         {
@@ -47,9 +49,17 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         {
             return _attackSpeed;
         }
-        public void SetAttackSpeed(float attackSpeed)
+        public void SetAttackSpeed(float lastAttack)
         {
-            _attackSpeed = attackSpeed; 
+            _lastAttack= lastAttack;
+        }
+        public float GetLastAttack()
+        {
+            return _attackSpeed;
+        }
+        public void SetLastAttack(float lastAttack)
+        {
+            _lastAttack= lastAttack;
         }
 
         public float GetInvulnerableTime()
@@ -57,7 +67,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             return _invulnerableTime;
         }
 
-        public void SetInvulerableTime(float time)
+        public void SetInvulnerableTime(float time)
         {
             _invulnerableTime = time;
         }
@@ -70,6 +80,24 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public void SetGravity(int gravity)
         {
             _gravity = gravity;
+        }
+        public float GetPositionY()
+        {
+            return _positionY;
+        }
+        public void SetPositionY(float positionY)
+        {
+            _positionY = positionY;
+            if (_positionY < 0.1f)
+            {
+                _positionY = 0.1f;
+                return;
+            }
+            if (_positionY > 0.8f)
+            {
+                _positionY = 0.8f;
+                return;
+            }
         }
     }
 }
