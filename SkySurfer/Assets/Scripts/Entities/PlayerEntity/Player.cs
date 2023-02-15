@@ -16,6 +16,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private float _invulnerableTime;
         private int _gravity;
         private float _positionY = 0.8f;
+        public readonly float _maxHeightPosition = 0.1f;
+        public readonly float _minHeightPosition = 0.8f;
 
         public float GetPowerUpTime()
         {
@@ -88,14 +90,14 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public void SetPositionY(float positionY)
         {
             _positionY = positionY;
-            if (_positionY < 0.1f)
+            if (_positionY < _maxHeightPosition)
             {
-                _positionY = 0.1f;
+                _positionY = _maxHeightPosition;
                 return;
             }
-            if (_positionY > 0.8f)
+            if (_positionY > _minHeightPosition)
             {
-                _positionY = 0.8f;
+                _positionY = _minHeightPosition;
                 return;
             }
         }
