@@ -22,6 +22,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         // Background
         private Color backgroundColor = Color.White;
 
+        RenderWindow window;
         public override void Cleanup()
         {
 
@@ -63,7 +64,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         }
 
-        public override void Init()
+        public override void Init(RenderWindow window)
         {
 
         }

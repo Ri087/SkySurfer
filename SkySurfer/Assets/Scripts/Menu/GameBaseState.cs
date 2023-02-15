@@ -9,7 +9,8 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     public abstract class GameBaseState
     {
-        public abstract void Init();
+        //private  RenderWindow window;
+        public abstract void Init(RenderWindow window);
         public abstract void Exit();
         public abstract void Cleanup();
         public abstract void Update(float deltaTime);

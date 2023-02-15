@@ -9,6 +9,9 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     internal class LooseMenuGameState : GameBaseState
     {
+
+        private RenderWindow window;
+
         public override void Cleanup()
         {
             //throw new NotImplementedException();
@@ -29,7 +32,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             //throw new NotImplementedException();
         }
 
-        public override void Init()
+        public override void Init(RenderWindow window)
         {
             //throw new NotImplementedException();
         }
