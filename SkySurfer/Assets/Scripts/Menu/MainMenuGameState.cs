@@ -17,6 +17,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         private Color selectedColor = Color.Green;
         private Font font = new("../../../Assets/Fonts/Balbek-Personal.otf");
         private MainMenu[] menu =
+
             {
                 new(text: "Play", x: 0.15f, y: 0.10f),
                 new(text: "Settings", x: 0.15f, y: 0.25f),
@@ -52,7 +53,6 @@ namespace SkySurfer.Assets.Scripts.Menu
         public override void Init()
         {
             SettingsManager.GetIntances().GetWindow().KeyPressed += MenuSelector;
-
         }
 
         public override void Update(float deltaTime)
@@ -73,7 +73,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             }
             SettingsManager.GetIntances().GetWindow().Draw(windowText);
         }
-        private void MenuSelector(Object sender , KeyEventArgs e)
+        private void MenuSelector(Object? sender , KeyEventArgs e)
         {
             if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down && e.Code != Keyboard.Key.Enter)
             {
@@ -85,27 +85,42 @@ namespace SkySurfer.Assets.Scripts.Menu
                 selected = menu.Length - 1;
                 return;
             }
-
             if (e.Code == Keyboard.Key.Up && selected > 0)
             {
                 selected--;
                 return;
             }
-
             if (e.Code == Keyboard.Key.Down && selected == menu.Length - 1)
             {
                 selected = 0;
                 return;
             }
-
             if (e.Code == Keyboard.Key.Down && selected < menu.Length - 1)
             {
                 selected++;
                 return;
             }
-            if (e.Code == Keyboard.Key.Enter)
+            if (e.Code == Keyboard.Key.Enter && selected == 0)
             {
-                Console.WriteLine("Changer de state");
+                Exit();
+                GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
+                return;
+            }
+            if (e.Code == Keyboard.Key.Enter && selected == 1)
+            {
+                Exit();
+                GameStateManager.GetInstance().AddState(GameStateManager.GetInstance().GetSettingsGameState());
+                return;
+            }
+            if (e.Code == Keyboard.Key.Enter && selected == 2)
+            {
+                Exit();
+                GameStateManager.GetInstance().AddState(GameStateManager.GetInstance().GetCreditsGameState());
+                return;
+            }
+            if (e.Code == Keyboard.Key.Enter && selected == 3)
+            {
+                Console.WriteLine("Quit Game !");
                 return;
             }
         }

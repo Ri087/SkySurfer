@@ -9,7 +9,6 @@ namespace SkySurfer.Assets.Scripts.Menu
 {
     class SettingsGameState : GameBaseState
     {
-        RenderWindow window;
         public override void Cleanup()
         {
 

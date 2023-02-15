@@ -21,8 +21,6 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         // Background
         private Color backgroundColor = Color.White;
-
-        RenderWindow window;
         public override void Cleanup()
         {
 
@@ -66,7 +64,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Init()
         {
-
+            Console.WriteLine("Play game init");
         }
 
         public override void Update(float deltaTime)
