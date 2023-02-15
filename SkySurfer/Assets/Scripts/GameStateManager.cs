@@ -20,7 +20,7 @@ namespace SkySurfer.Assets.Scripts
         public GameStateManager()
         {
             //_states.Push(_mainMenuGameState);
-            _states.Push(_playGameState);
+            _states.Push(_mainMenuGameState);
         }
         public static GameStateManager GetInstance()
         {
