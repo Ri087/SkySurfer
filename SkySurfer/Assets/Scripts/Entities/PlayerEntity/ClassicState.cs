@@ -17,7 +17,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private bool _flying;
         public override void Cleanup()
         {
-
+            
         }
 
         public override void Draw()
