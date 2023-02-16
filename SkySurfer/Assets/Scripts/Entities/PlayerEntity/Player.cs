@@ -51,17 +51,17 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         {
             return _attackSpeed;
         }
-        public void SetAttackSpeed(float lastAttack)
+        public void SetAttackSpeed(float attackSpeed)
         {
-            _lastAttack= lastAttack;
+            _attackSpeed = attackSpeed;
         }
         public float GetLastAttack()
         {
-            return _attackSpeed;
+            return _lastAttack;
         }
         public void SetLastAttack(float lastAttack)
         {
-            _lastAttack= lastAttack;
+            _lastAttack = lastAttack;
         }
 
         public float GetInvulnerableTime()

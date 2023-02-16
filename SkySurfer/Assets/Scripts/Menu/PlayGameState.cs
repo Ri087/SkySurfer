@@ -50,6 +50,9 @@ namespace SkySurfer.Assets.Scripts.Menu
 
             // Player of the game
             PlayerStateManager.GetInstance().GetStates().Peek().Draw();
+
+            // Lasers of the game
+            LaserStateManager.GetInstance().DrawLasers();
         }
 
         public override void Exit()
@@ -69,8 +72,13 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Update(float deltaTime)
         {
-            _velocity += deltaTime / 90;
+            _velocity += deltaTime / 45;
+            if (_velocity > 5)
+            {
+                _velocity = 5;
+            }
             PlayerStateManager.GetInstance().GetStates().Peek().Update(deltaTime, _velocity);
+            LaserStateManager.GetInstance().UpdateLasers(deltaTime, _velocity);
         }
     }
 }
