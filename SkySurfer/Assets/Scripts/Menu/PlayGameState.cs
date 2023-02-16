@@ -53,6 +53,9 @@ namespace SkySurfer.Assets.Scripts.Menu
 
             // Lasers of the game
             LaserStateManager.GetInstance().DrawLasers();
+
+            // Enemies of the game
+            EnemyStateManager.GetInstance().DrawEnemies();
         }
 
         public override void Exit()
@@ -79,6 +82,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             }
             PlayerStateManager.GetInstance().GetStates().Peek().Update(deltaTime, _velocity);
             LaserStateManager.GetInstance().UpdateLasers(deltaTime, _velocity);
+            EnemyStateManager.GetInstance().UpdateEnemies(deltaTime * 1.3f, _velocity);
         }
     }
 }
