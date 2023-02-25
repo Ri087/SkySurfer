@@ -16,5 +16,7 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         public abstract void Draw();
         public abstract void HandleInput();
         public abstract bool CheckIfOut();
+        public abstract bool CheckColision();
+
     }
 }

@@ -33,15 +33,19 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
             float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
             float windowY = SettingsManager.GetIntances().GetWindow().Size.Y;
 
-            // Enemy of the game
             RectangleShape enemy = new(new Vector2f(windowX * 0.08f, windowY * 0.1f));
+            enemy.Position = new Vector2f(windowX * _enemy.GetPositionX(), windowY * _enemy.GetPositionY());
             enemy.FillColor = Color.Red;
-            enemy.Position = new(windowX * _enemy.GetPositionX(), windowY * _enemy.GetPositionY());
+
+            // Ajout de le hit-box de l'ennemi
+            _enemy.SetEnemyBounds(enemy);
+
             SettingsManager.GetIntances().GetWindow().Draw(enemy);
         }
 
         public override void Exit()
         {
+            EnemyStateManager.GetInstance().GetEnemies().Clear();   
         }
 
         public override void HandleInput()
@@ -55,7 +59,12 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
         public override void Update(float deltaTime, float velocity)
         {
             _enemy.SetPositionX(_enemy.GetPositionX() - deltaTime * velocity / 5);
-
+         }
+        
+        public override bool CheckColision()
+        {
+            // detection collision entre ennemi et joueur
+            return _enemy.GetEnemyBounds().Intersects(PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds());
         }
     }
 }

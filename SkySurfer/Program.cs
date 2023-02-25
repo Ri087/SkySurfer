@@ -18,7 +18,7 @@ namespace SkyRunner
 
             while (SettingsManager.GetIntances().GetWindow().IsOpen)
             {
-
+               
                 SettingsManager.GetIntances().GetWindow().DispatchEvents();
 
                 SettingsManager.GetIntances().GetWindow().Clear();

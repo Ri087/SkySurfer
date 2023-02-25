@@ -1,6 +1,8 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SkySurfer.Assets.Scripts.Entities;
+using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
+using SkySurfer.Assets.Scripts.Entities.LaserEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace SkySurfer.Assets.Scripts.Menu
         private float containerLength = 0.1f;
         private Color roofColor = Color.Green;
         private Color floorColor = Color.Blue;
+        private Font font = new("../../../Assets/Fonts/Balbek-Personal.otf");
+        private int FONT_SIZE = 20;
 
         // Background
         private Color backgroundColor = Color.White;
@@ -48,6 +52,9 @@ namespace SkySurfer.Assets.Scripts.Menu
             background.FillColor = backgroundColor;
             SettingsManager.GetIntances().GetWindow().Draw(background);
 
+            // Score of the player
+            ScorePrint(PlayerStateManager.GetInstance().GetPlayer().GetScore().ToString(),font);
+
             // Player of the game
             PlayerStateManager.GetInstance().GetStates().Peek().Draw();
 
@@ -60,7 +67,12 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Exit()
         {
+            // Reset position of player
+            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(0.8f);
 
+            // Clear all items (laser and enemies)
+            EnemyStateManager.GetInstance().GetEnemies().Clear();
+            LaserStateManager.GetInstance().GetLasers().Clear();
         }
 
         public override void HandleInput()
@@ -70,7 +82,8 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Init()
         {
-            Console.WriteLine("Play game init");
+            // Init Player Score
+            PlayerStateManager.GetInstance().GetPlayer().SetScore(0);
         }
 
         public override void Update(float deltaTime)
@@ -83,6 +96,15 @@ namespace SkySurfer.Assets.Scripts.Menu
             PlayerStateManager.GetInstance().GetStates().Peek().Update(deltaTime, _velocity);
             LaserStateManager.GetInstance().UpdateLasers(deltaTime, _velocity);
             EnemyStateManager.GetInstance().UpdateEnemies(deltaTime * 1.3f, _velocity);
+          
+        
+        }
+        private void ScorePrint(string text, Font font)
+        {
+            Text windowText = new(text, font);
+            windowText.FillColor = Color.Black;
+            windowText.Position = new Vector2f(0f, 0.1f * SettingsManager.GetIntances().GetWindow().Size.X);
+            SettingsManager.GetIntances().GetWindow().Draw(windowText);
         }
     }
 }

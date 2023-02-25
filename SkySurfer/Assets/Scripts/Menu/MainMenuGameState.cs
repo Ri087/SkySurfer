@@ -53,6 +53,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         public override void Init()
         {
             SettingsManager.GetIntances().GetWindow().KeyPressed += MenuSelector;
+
         }
 
         public override void Update(float deltaTime)
@@ -103,6 +104,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             if (e.Code == Keyboard.Key.Enter && selected == 0)
             {
                 Exit();
+                GameStateManager.GetInstance().GetPlayGameBaseState().Exit();
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
                 return;
             }

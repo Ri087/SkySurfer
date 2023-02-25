@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
 using SkySurfer.Assets.Scripts.Entities.PlayerEntity;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,17 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
 
         public override void Draw()
         {
+          
             float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
             float windowY = SettingsManager.GetIntances().GetWindow().Size.Y;
 
-            // Laser of the game
             RectangleShape laser = new(new Vector2f(windowX * 0.03f, windowY * _laser.length));
+
+            laser.Position = new Vector2f(windowX * _laser.GetPositionX(), windowY * _laser.GetPositionY());
             laser.FillColor = Color.Black;
-            laser.Position = new(windowX * _laser.GetPositionX(), windowY * _laser.GetPositionY());
-            laser.Rotation = _laser.rotation;
+
+            _laser.SetLaserBounds(laser);
+
             SettingsManager.GetIntances().GetWindow().Draw(laser);
         }
 
@@ -58,6 +62,11 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         public override void Update(float deltaTime, float velocity)
         {
             _laser.SetPositionX(_laser.GetPositionX() - deltaTime * velocity / 5);
+        }
+        public override bool CheckColision()
+        {
+            // detection collision entre laser et joueur
+            return _laser.GetLaserBounds().Intersects(PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds());
         }
     }
 }

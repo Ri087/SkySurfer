@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
         private int _damageHp;
         private float _positionX = 1.25f;
         private float _positionY = 0.8f;
+        private FloatRect _EnemyFloatRect;
 
 
         
@@ -41,6 +43,14 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
         public float GetPositionY()
         { 
             return this._positionY;
+        }
+        public void SetEnemyBounds(RectangleShape enemy)
+        {
+            this._EnemyFloatRect = enemy.GetGlobalBounds();
+        }
+        public FloatRect GetEnemyBounds()
+        {
+            return _EnemyFloatRect;
         }
     }
 }

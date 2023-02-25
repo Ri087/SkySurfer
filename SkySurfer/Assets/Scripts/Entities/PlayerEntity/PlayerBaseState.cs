@@ -15,5 +15,6 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public abstract void Update(float deltaTime, float velocity);
         public abstract void Draw();
         public abstract void HandleInput();
+       // public abstract void CheckColision();
     }
 }

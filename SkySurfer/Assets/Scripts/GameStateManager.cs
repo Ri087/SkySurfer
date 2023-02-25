@@ -14,7 +14,8 @@ namespace SkySurfer.Assets.Scripts
         private MainMenuGameState _mainMenuGameState = new();
         private PlayGameState _playGameState = new();
         private SettingsGameState _SettingsGameState = new();
-        private CreditsGameState _CreditsGameState = new();  
+        private CreditsGameState _CreditsGameState = new();
+        private LooseMenuGameState _LoosMenuGameState = new();
         private Stack<GameBaseState> _states = new();
 
         public GameStateManager()
@@ -39,6 +40,10 @@ namespace SkySurfer.Assets.Scripts
         public GameBaseState GetPlayGameBaseState()
         {
             return _playGameState;
+        }
+        public GameBaseState GetLooseMenuGameState()
+        {
+            return _LoosMenuGameState;
         }
         public GameBaseState GetSettingsGameState()
         {

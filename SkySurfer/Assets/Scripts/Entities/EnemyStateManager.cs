@@ -50,6 +50,15 @@ namespace SkySurfer.Assets.Scripts.Entities
                 {
                     _enemies.Remove(_enemies.First());
                 }
+                foreach(EnemyBaseState enemy in _enemies)
+                {
+                    if (enemy.CheckColision())
+                    {
+                        Console.WriteLine("colision");
+                        GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
+                        return;
+                   }
+                }
             }
         }
 
@@ -61,6 +70,5 @@ namespace SkySurfer.Assets.Scripts.Entities
             _enemies.Add(new ClassicState());
         }
     }
-
 }
 

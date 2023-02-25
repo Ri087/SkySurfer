@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,12 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private float _invulnerableTime;
         private int _gravity;
         private float _positionY = 0.8f;
+        private FloatRect _playerFloatRect;
+        private int _score;
         public readonly float _maxHeightPosition = 0.1f;
         public readonly float _minHeightPosition = 0.8f;
+        
+
 
         public float GetPowerUpTime()
         {
@@ -100,6 +105,22 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
                 _positionY = _minHeightPosition;
                 return;
             }
+        }
+        public void SetPLayeryBounds(RectangleShape player)
+        {
+            this._playerFloatRect = player.GetGlobalBounds();
+        }
+        public FloatRect GetPlayerBounds()
+        {
+            return _playerFloatRect;
+        }
+        public void SetScore(int score)
+        {
+            _score = score;
+        }
+        public int GetScore()
+        {
+            return _score;
         }
     }
 }
