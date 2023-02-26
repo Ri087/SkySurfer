@@ -56,7 +56,6 @@ namespace SkySurfer.Assets.Scripts.Entities
                 {
                     if (laser.CheckColision())
                     { 
-                        Console.WriteLine("colision");
                         GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
                     }
                 }

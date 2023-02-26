@@ -149,9 +149,12 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             if (e.Code != SettingsManager.GetIntances().GetShotKey()) return;
             if (1 / _player.GetAttackSpeed() > _player.GetLastAttack()) return;
             _player.SetLastAttack(0);
-            Console.WriteLine("Shoot");
-        }
 
+
+            // Apparition du shoot
+            ShootStateManager.GetInstance().SpawnShoot(_player.GetPositionY());
+        }
+    
        // public override void CheckColision()
        // {
        // }

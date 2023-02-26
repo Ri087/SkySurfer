@@ -54,10 +54,10 @@ namespace SkySurfer.Assets.Scripts.Entities
                 {
                     if (enemy.CheckColision())
                     {
-                        Console.WriteLine("colision");
                         GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
                         return;
                    }
+
                 }
             }
         }
