@@ -155,7 +155,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0);
 
             // Apparition du shoot
-            ShootStateManager.GetInstance().SpawnShoot(PlayerStateManager.GetInstance().GetPlayer().GetPositionY());
+            ShootStateManager.GetInstance().SpawnShoot();
         }
 
         public override bool CheckCollision()

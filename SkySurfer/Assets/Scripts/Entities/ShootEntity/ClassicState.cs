@@ -29,18 +29,17 @@ namespace SkySurfer.Assets.Scripts.Entities.ShootEntity
             float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
             float windowY = SettingsManager.GetIntances().GetWindow().Size.Y;
 
-            RectangleShape shoot = new(new Vector2f(windowX * _shoot.length, windowY * _shoot.height));
+            RectangleShape shoot = new(new Vector2f(windowX * _shoot._length, windowY * _shoot._height));
 
-            shoot.Position = new Vector2f(windowX * _shoot.GetPositionX(), windowY * _shoot.GetPositiony());
+            shoot.Position = new Vector2f(windowX * _shoot.GetPositionX(), windowY * _shoot._positionY);
             shoot.FillColor = Color.Blue;
 
             _shoot.SetShootBounds(shoot);
 
             SettingsManager.GetIntances().GetWindow().Draw(shoot);
         }
-        public override void Init(float y)
+        public override void Init()
         {
-            _shoot.SetPositionY(y);
         }
 
         public override void Update(float deltaTime, float velocity)

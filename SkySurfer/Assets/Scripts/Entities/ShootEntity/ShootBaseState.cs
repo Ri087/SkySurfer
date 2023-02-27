@@ -8,7 +8,7 @@ namespace SkySurfer.Assets.Scripts.Entities.ShootEntity
 {
     public abstract class ShootBaseState
     {
-        public abstract void Init(float y);
+        public abstract void Init();
         public abstract void Update(float deltaTime, float velocity);
         public abstract void Draw();
         public abstract bool CheckIfOut();

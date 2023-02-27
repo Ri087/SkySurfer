@@ -65,13 +65,9 @@ namespace SkySurfer.Assets.Scripts.Entities
                 }
             }
         }
-        public void SpawnShoot(float y)
+        public void SpawnShoot()
         {
-
             _shoot.Add(new ClassicState());
-           GetInstance().GetShoot().Last().Init(y);
-          
-            
         }
     }
 }
