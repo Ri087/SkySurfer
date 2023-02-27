@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 using SkySurfer.Assets.Scripts.Entities;
 using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
 using SkySurfer.Assets.Scripts.Entities.LaserEntity;
@@ -76,6 +77,8 @@ namespace SkySurfer.Assets.Scripts.Menu
             LaserStateManager.GetInstance().Clear();
             PowerUpStateManager.GetInstance().Clear();
             ShootStateManager.GetInstance().Clear();
+            SettingsManager.GetIntances().GetWindow().KeyPressed -= PauseMenu;
+
             _velocity = 1;
         }
 
@@ -88,7 +91,9 @@ namespace SkySurfer.Assets.Scripts.Menu
         {
             // Init Player Score
             PlayerStateManager.GetInstance().GetStates().Peek().Init();
-            PlayerStateManager.GetInstance().GetPlayer().SetScore(0);
+
+            SettingsManager.GetIntances().GetWindow().KeyPressed += PauseMenu;
+
         }
 
         public override void Update(float deltaTime)
@@ -110,6 +115,22 @@ namespace SkySurfer.Assets.Scripts.Menu
             windowText.FillColor = Color.Black;
             windowText.Position = new Vector2f(0f, 0.1f * SettingsManager.GetIntances().GetWindow().Size.X);
             SettingsManager.GetIntances().GetWindow().Draw(windowText);
+        }
+        public void Pause()
+        {
+            SettingsManager.GetIntances().GetWindow().KeyPressed -= PauseMenu;
+            GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPauseMenuGameState());
+        }
+
+
+        private void PauseMenu(Object? sender, KeyEventArgs e)
+        {
+            if (e.Code != Keyboard.Key.Escape)
+            {
+                return;
+            }
+            Console.WriteLine("lol");
+            Pause();
         }
     }
 }

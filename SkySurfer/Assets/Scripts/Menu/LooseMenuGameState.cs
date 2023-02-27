@@ -42,7 +42,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Exit()
         {
-            SettingsManager.GetIntances().GetWindow().KeyPressed -= MenuSelector;
+            SettingsManager.GetIntances().GetWindow().KeyPressed -= LooseMenuSelector;
         }
 
         public override void HandleInput()
@@ -52,7 +52,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Init()
         {
-            SettingsManager.GetIntances().GetWindow().KeyPressed += MenuSelector;
+            SettingsManager.GetIntances().GetWindow().KeyPressed += LooseMenuSelector;
         }
 
         public override void Update(float deltaTime)
@@ -83,7 +83,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
 
         }
-        private void MenuSelector(Object? sender, KeyEventArgs e)
+        private void LooseMenuSelector(Object? sender, KeyEventArgs e)
         {
             if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down && e.Code != Keyboard.Key.Enter)
             {
@@ -112,7 +112,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             }
             if (e.Code == Keyboard.Key.Enter && selected == 0)
             {
-                GameStateManager.GetInstance().GetStates().Peek().Exit();
+                Exit();
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
                 return;
             }

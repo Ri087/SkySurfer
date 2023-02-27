@@ -16,11 +16,17 @@ namespace SkySurfer.Assets.Scripts
         private SettingsGameState _SettingsGameState = new();
         private CreditsGameState _CreditsGameState = new();
         private LooseMenuGameState _LoosMenuGameState = new();
+        private PauseMenuGameState _PauseMenuGameState = new();
         private Stack<GameBaseState> _states = new();
+
 
         public GameStateManager()
         {
             _states.Push(_mainMenuGameState);
+        }
+        public GameBaseState GetPauseMenuGameState()
+        {
+            return _PauseMenuGameState;
         }
         public static GameStateManager GetInstance()
         {
