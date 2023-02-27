@@ -20,6 +20,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         {
             foreach (LaserBaseState laser in LaserStateManager.GetInstance().GetLasers())
             {
+               
                 if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(laser.GetLaserHitBox()))
                 {
                     return true;
@@ -42,7 +43,9 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             RectangleShape player = new(new Vector2f(windowX * 0.06f, windowY * 0.1f));
             player.FillColor = Color.Green;
             player.Position = new(windowX * 0.1f, windowY * PlayerStateManager.GetInstance().GetPlayer().GetPositionY());
-            
+
+            PlayerStateManager.GetInstance().GetPlayer().SetPLayeryBounds(player);
+;
             SettingsManager.GetIntances().GetWindow().Draw(player);
         }
 
