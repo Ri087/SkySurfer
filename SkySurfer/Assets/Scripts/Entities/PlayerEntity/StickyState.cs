@@ -44,8 +44,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         public override void Exit()
         {
+            PlayerStateManager.GetInstance().GetClassicState().Exit();
             PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetClassicState());
-            PlayerStateManager.GetInstance().GetStates().Peek().Exit();
         }
 
         public override void HandleInput()

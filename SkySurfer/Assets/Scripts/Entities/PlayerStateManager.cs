@@ -30,15 +30,6 @@ namespace SkySurfer.Assets.Scripts.Entities
             return _instance;
         }
 
-        public void Clear()
-        {
-            _classicState = new();
-            SwitchState(GetClassicState());
-            _player = new();
-            _heavyState = new();
-            _stickyState = new();
-        }
-
         public Player GetPlayer()
         {
             return _player;

@@ -4,6 +4,7 @@ using SFML.Window;
 using SkySurfer.Assets.Scripts.Entities;
 using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
 using SkySurfer.Assets.Scripts.Entities.LaserEntity;
+using SkySurfer.Assets.Scripts.Entities.PlayerEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,6 @@ namespace SkySurfer.Assets.Scripts.Menu
         private Color backgroundColor = Color.White;
         public override void Cleanup()
         {
-           
         }
 
         public override void Draw()
@@ -75,7 +75,6 @@ namespace SkySurfer.Assets.Scripts.Menu
         {
             EnemyStateManager.GetInstance().Clear();
             LaserStateManager.GetInstance().Clear();
-            PlayerStateManager.GetInstance().Clear();
             PowerUpStateManager.GetInstance().Clear();
             ShootStateManager.GetInstance().Clear();
             SettingsManager.GetIntances().GetWindow().KeyPressed -= PauseMenu;
@@ -126,7 +125,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         private void PauseMenu(Object? sender, KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Escape)
+            if (e.Code != SettingsManager.GetIntances().GetMenuBackKey())
             {
                 return;
             }

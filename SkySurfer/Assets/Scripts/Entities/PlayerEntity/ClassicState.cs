@@ -44,6 +44,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             SettingsManager.GetIntances().GetWindow().KeyPressed -= Shoot;
             SettingsManager.GetIntances().GetWindow().KeyPressed -= Flying;
             SettingsManager.GetIntances().GetWindow().KeyReleased -= NotFlying;
+
+            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(0.8f);
         }
         public override void HandleInput()
         {
@@ -58,7 +60,6 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
             // player stats
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(0); // Not a powerup state
-            PlayerStateManager.GetInstance().GetPlayer().SetHp(1); // 1 HP max
             PlayerStateManager.GetInstance().GetPlayer().SetJump(0); // 0 means that he can fly
             PlayerStateManager.GetInstance().GetPlayer().SetAttackSpeed(2.5f); // 1 Attack speed
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0); // Reset attack timer
@@ -73,7 +74,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         {
             if (CheckCollision())
             {
-                GameStateManager.GetInstance().GetStates().Peek().Exit();
+                Exit();
+                GameStateManager.GetInstance().GetStates().Peek().Exit();           
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
             }
             SetFlyingSpeed(deltaTime);
