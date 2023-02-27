@@ -21,13 +21,12 @@ namespace SkySurfer.Assets.Scripts.Menu
         private Color roofColor = Color.Green;
         private Color floorColor = Color.Blue;
         private Font font = new("../../../Assets/Fonts/Balbek-Personal.otf");
-        private int FONT_SIZE = 20;
 
         // Background
         private Color backgroundColor = Color.White;
         public override void Cleanup()
         {
-
+           
         }
 
         public override void Draw()
@@ -53,7 +52,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             SettingsManager.GetIntances().GetWindow().Draw(background);
 
             // Score of the player
-            ScorePrint(PlayerStateManager.GetInstance().GetPlayer().GetScore().ToString(),font);
+            ScorePrint(Math.Floor(PlayerStateManager.GetInstance().GetPlayer().GetScore()).ToString(),font);
 
             // Player of the game
             PlayerStateManager.GetInstance().GetStates().Peek().Draw();
@@ -73,12 +72,12 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Exit()
         {
-            // Reset position of player
-            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(0.8f);
-
-            // Clear all items (laser and enemies)
-            EnemyStateManager.GetInstance().GetEnemies().Clear();
-            LaserStateManager.GetInstance().GetLasers().Clear();
+            EnemyStateManager.GetInstance().Clear();
+            LaserStateManager.GetInstance().Clear();
+            PlayerStateManager.GetInstance().Clear();
+            PowerUpStateManager.GetInstance().Clear();
+            ShootStateManager.GetInstance().Clear();
+            _velocity = 1;
         }
 
         public override void HandleInput()
@@ -89,21 +88,22 @@ namespace SkySurfer.Assets.Scripts.Menu
         public override void Init()
         {
             // Init Player Score
+            PlayerStateManager.GetInstance().GetStates().Peek().Init();
             PlayerStateManager.GetInstance().GetPlayer().SetScore(0);
         }
 
         public override void Update(float deltaTime)
         {
-            _velocity += deltaTime / 45;
-            if (_velocity > 5)
+            if (_velocity < 5)
             {
-                _velocity = 5;
+                _velocity += deltaTime / 45;
             }
             PlayerStateManager.GetInstance().GetStates().Peek().Update(deltaTime, _velocity);
             LaserStateManager.GetInstance().UpdateLasers(deltaTime, _velocity);
-            EnemyStateManager.GetInstance().UpdateEnemies(deltaTime * 1.3f, _velocity);
+            EnemyStateManager.GetInstance().UpdateEnemies(deltaTime, _velocity);
             ShootStateManager.GetInstance().UpdateShoot(deltaTime, _velocity);
-            PowerUpStateManager.GetInstance().UpdatePowerUp(deltaTime, _velocity);        
+            PowerUpStateManager.GetInstance().UpdatePowerUp(deltaTime, _velocity);
+            PlayerStateManager.GetInstance().GetPlayer().SetScore(PlayerStateManager.GetInstance().GetPlayer().GetScore() + deltaTime * 10);
         }
         private void ScorePrint(string text, Font font)
         {

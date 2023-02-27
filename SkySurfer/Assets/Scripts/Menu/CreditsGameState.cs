@@ -66,7 +66,6 @@ namespace SkySurfer.Assets.Scripts.Menu
             if (e.Code == Keyboard.Key.Escape)
             {
                 Exit();
-                GameStateManager.GetInstance().ReturnState();
                 return;
             }
 

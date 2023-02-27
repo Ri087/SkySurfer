@@ -9,12 +9,15 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
 {
     internal class Enemy
     {
-        private int _damageHp;
+        private int _damageHp = 1;
         private float _positionX = 1.25f;
-        private float _positionY = 0.8f;
+        private float _positionY;
         private FloatRect _EnemyFloatRect;
 
-
+        public Enemy()
+        {
+            _positionY = (float)new Random().NextDouble() * 0.7f + 0.1f;
+        }
         
         public void SetDamage(int damageHp)
         {

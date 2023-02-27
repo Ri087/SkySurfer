@@ -19,11 +19,6 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         {
             return _powerUp.GetPositionX() < -0.25f;
         }
-        public override void Cleanup()
-        {
-
-        }
-
         public override void Draw()
         {
             float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
@@ -36,22 +31,10 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
 
             SettingsManager.GetIntances().GetWindow().Draw(powerUp);
         }
-
-        public override void Exit()
-        {
-
-        }
-
-        public override void HandleInput()
-        {
-
-        }
-
         public override void Init()
         {
             _powerUp = new();
         }
-
         public override void Update(float deltaTime, float velocity)
         {
             _powerUp.SetPositionX(_powerUp.GetPositionX() - deltaTime * velocity / 5);

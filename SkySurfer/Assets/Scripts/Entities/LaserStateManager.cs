@@ -23,6 +23,12 @@ namespace SkySurfer.Assets.Scripts.Entities
             return _instance;
         }
 
+        public void Clear()
+        {
+            _lasers.Clear();
+            _timeFromLastLaser = 2.5f;
+            _timeBetweenLaser = 3.5f;
+        }
         public List<LaserBaseState> GetLasers()
         {
             return _lasers;

@@ -20,18 +20,10 @@ namespace SkySurfer.Assets.Scripts.Entities.ShootEntity
         {
             _shoot = new();
         }
-   
-
         public override bool CheckIfOut()
         {
             return _shoot.GetPositionX() > 1.25f;
         }
-        
-        public override void Cleanup()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Draw()
         {
             float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
@@ -46,17 +38,6 @@ namespace SkySurfer.Assets.Scripts.Entities.ShootEntity
 
             SettingsManager.GetIntances().GetWindow().Draw(shoot);
         }
-
-        public override void Exit()
-        {
-            
-        }
-
-        public override void HandleInput()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Init(float y)
         {
             _shoot.SetPositionY(y);
@@ -69,13 +50,11 @@ namespace SkySurfer.Assets.Scripts.Entities.ShootEntity
         public override bool CheckColision()
         {
             // detection collision entre shoot et enemy
-            foreach(EnemyBaseState enemy in EnemyStateManager.GetInstance().GetEnemies())
+            foreach (EnemyBaseState enemy in EnemyStateManager.GetInstance().GetEnemies())
             {
                 return _shoot.GetShootBounds().Intersects(enemy.GetShootHitBox());
             }
             return false;
         }
-
-     
     }
 }

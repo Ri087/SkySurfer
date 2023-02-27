@@ -9,7 +9,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 {
     public abstract class PlayerBaseState
     {
-        public abstract void Init(Player player);
+        public abstract void Init();
         public abstract void Exit();
         public abstract void Cleanup();
         public abstract void Update(float deltaTime, float velocity);

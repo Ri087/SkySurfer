@@ -18,11 +18,9 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private int _gravity;
         private float _positionY = 0.8f;
         private FloatRect _hitbox;
-        private int _score;
+        private float _score;
         public readonly float _maxHeightPosition = 0.1f;
         public readonly float _minHeightPosition = 0.8f;
-        
-
 
         public float GetPowerUpTime()
         {
@@ -114,11 +112,11 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         {
             return _hitbox;
         }
-        public void SetScore(int score)
+        public void SetScore(float score)
         {
             _score = score;
         }
-        public int GetScore()
+        public float GetScore()
         {
             return _score;
         }

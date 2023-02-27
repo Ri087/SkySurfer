@@ -11,8 +11,8 @@ namespace SkySurfer.Assets.Scripts.Entities
     {
         private static EnemyStateManager _instance = new();
         private List<EnemyBaseState> _enemies = new List<EnemyBaseState>();
-        private float _timeFromLastEnemy = 2.5f;
-        private float _timeBetweenEnemy = 12f;
+        private float _timeFromLastEnemy = 1;
+        private float _timeBetweenEnemy = 3;
         public static EnemyStateManager GetInstance()
         {
             if (_instance == null)
@@ -20,6 +20,12 @@ namespace SkySurfer.Assets.Scripts.Entities
                 _instance = new();
             }
             return _instance;
+        }
+        public void Clear()
+        {
+            _enemies.Clear();
+            _timeFromLastEnemy = 2.5f;
+            _timeBetweenEnemy = 12f;
         }
         public List<EnemyBaseState> GetEnemies()
         {
@@ -33,7 +39,6 @@ namespace SkySurfer.Assets.Scripts.Entities
                 enemy.Draw();
             }
         }
-
         public void UpdateEnemies(float deltaTime, float velocity)
         {
             SpawnNewEnemy(deltaTime, velocity);
@@ -55,7 +60,7 @@ namespace SkySurfer.Assets.Scripts.Entities
 
         public void SpawnNewEnemy(float deltaTime, float velocity)
         {
-            _timeFromLastEnemy += deltaTime + (velocity / 2.35f) * deltaTime;
+            _timeFromLastEnemy += deltaTime + (velocity / 5) * deltaTime;
             if (_timeFromLastEnemy < _timeBetweenEnemy) return;
             _timeFromLastEnemy = 0;
             _enemies.Add(new ClassicState());

@@ -19,7 +19,6 @@ namespace SkySurfer.Assets.Scripts.Entities
         public PlayerStateManager()
         {
             _states.Push(_classicState);
-            _states.Peek().Init(_player); // A mettre dans event du menu
         }
 
         public static PlayerStateManager GetInstance()
@@ -29,6 +28,15 @@ namespace SkySurfer.Assets.Scripts.Entities
                 _instance = new();
             }
             return _instance;
+        }
+
+        public void Clear()
+        {
+            _classicState = new();
+            SwitchState(GetClassicState());
+            _player = new();
+            _heavyState = new();
+            _stickyState = new();
         }
 
         public Player GetPlayer()
@@ -58,7 +66,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         {
             _states.Pop();
             _states.Push(state);
-            _states.Peek().Init(_player);
+            _states.Peek().Init();
         }
     }
 }

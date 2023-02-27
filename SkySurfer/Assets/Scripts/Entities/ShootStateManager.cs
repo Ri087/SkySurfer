@@ -22,6 +22,11 @@ namespace SkySurfer.Assets.Scripts.Entities
             return _instance;
         }
 
+        public void Clear()
+        {
+            _shoot.Clear();
+        }
+
         public List<ShootBaseState> GetShoot()
         {
             return _shoot;

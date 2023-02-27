@@ -10,11 +10,9 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 {
     class StickyState : PlayerBaseState
     {
-        private Player _player;
-
         public override bool CheckCollision()
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override void Cleanup()
@@ -30,13 +28,14 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             // Player of the game
             RectangleShape player = new(new Vector2f(windowX * 0.06f, windowY * 0.1f));
             player.FillColor = Color.Green;
-            player.Position = new(windowX * 0.1f, windowY * _player.GetPositionY());
+            player.Position = new(windowX * 0.1f, windowY * PlayerStateManager.GetInstance().GetPlayer().GetPositionY());
             SettingsManager.GetIntances().GetWindow().Draw(player);
         }
 
         public override void Exit()
         {
-
+            PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetClassicState());
+            PlayerStateManager.GetInstance().GetStates().Peek().Exit();
         }
 
         public override void HandleInput()
@@ -44,16 +43,15 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         }
 
-        public override void Init(Player player)
+        public override void Init()
         {
-            _player = player;
-            _player.SetPowerUpTime(15); // Not a powerup state
+            PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(15); // Not a powerup state
         }
 
         public override void Update(float deltaTime, float velocity)
         {
-            _player.SetPowerUpTime(_player.GetPowerUpTime() - deltaTime);
-            if (_player.GetPowerUpTime() <= 0)
+            PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() - deltaTime);
+            if (PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() <= 0)
             {
                 // Switch states
             }

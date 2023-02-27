@@ -20,7 +20,6 @@ namespace SkySurfer.Assets.Scripts
 
         public GameStateManager()
         {
-            //_states.Push(_mainMenuGameState);
             _states.Push(_mainMenuGameState);
         }
         public static GameStateManager GetInstance()
@@ -63,17 +62,6 @@ namespace SkySurfer.Assets.Scripts
             _states.Pop();
             _states.Push(state);
             _states.Peek().Init();
-        }
-
-        public void AddState(GameBaseState state)
-        {
-            _states.Push(state);
-            _states.Peek().Init();
-        }
-        public void ReturnState()
-        {
-            _states.Pop();
-            _states.Peek().Init();
-        }        
+        }      
     }
 }

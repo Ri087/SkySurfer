@@ -22,49 +22,24 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         {
             return _laser.GetPositionX() < -0.25f;
         }
-
-        public override void Cleanup()
-        {
-
-        }
-
         public override void Draw()
         {
-          
             float windowX = SettingsManager.GetIntances().GetWindow().Size.X;
             float windowY = SettingsManager.GetIntances().GetWindow().Size.Y;
 
-            RectangleShape laser = new(new Vector2f(windowX * 0.03f, windowY * _laser.length));
+            RectangleShape laser = new(new Vector2f(windowX * 0.015f, windowY * _laser.length));
 
             laser.Position = new Vector2f(windowX * _laser.GetPositionX(), windowY * _laser.GetPositionY());
-            laser.FillColor = Color.Black;
+            laser.FillColor = Color.Yellow;
 
             _laser.SetLaserBounds(laser);
 
             SettingsManager.GetIntances().GetWindow().Draw(laser);
         }
-
-        public override void Exit()
-        {
-            
-        }
-
-        public override void HandleInput()
-        {
-            
-        }
-
-        public override void Init()
-        {
-            
-        }
-
         public override void Update(float deltaTime, float velocity)
         {
             _laser.SetPositionX(_laser.GetPositionX() - deltaTime * velocity /5);
         }
-    
-
         public override FloatRect GetLaserHitBox()
         {
            return _laser.GetLaserBounds();

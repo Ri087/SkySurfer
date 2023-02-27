@@ -6,6 +6,7 @@ using SkySurfer.Assets.Scripts.Entities.LaserEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,6 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 {
     class ClassicState : PlayerBaseState
     {
-        private Player _player;
         private float _flyingSpeed;
         private readonly float _flyingSpeedMax = 0.5f;
         private bool _flying;
@@ -29,10 +29,10 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
             RectangleShape player = new(new Vector2f(windowX * 0.06f, windowY * 0.1f));
 
-            player.Position = new Vector2f(windowX * 0.1f, windowY * _player.GetPositionY());
+            player.Position = new Vector2f(windowX * 0.1f, windowY * PlayerStateManager.GetInstance().GetPlayer().GetPositionY());
             player.FillColor = Color.Black;
 
-            _player.SetPLayeryBounds(player);
+            PlayerStateManager.GetInstance().GetPlayer().SetPLayeryBounds(player);
 
             SettingsManager.GetIntances().GetWindow().Draw(player);
 
@@ -43,15 +43,13 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             SettingsManager.GetIntances().GetWindow().KeyPressed -= Shoot;
             SettingsManager.GetIntances().GetWindow().KeyPressed -= Flying;
             SettingsManager.GetIntances().GetWindow().KeyReleased -= NotFlying;
-
         }
-
         public override void HandleInput()
         {
 
         }
 
-        public override void Init(Player player)
+        public override void Init()
         {
             Console.Write("hello world");
             // Event
@@ -59,14 +57,13 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             SettingsManager.GetIntances().GetWindow().KeyPressed += Flying;
 
             // player stats
-            _player = player;
-            _player.SetPowerUpTime(0); // Not a powerup state
-            _player.SetHp(1); // 1 HP max
-            _player.SetJump(0); // 0 means that he can fly
-            _player.SetAttackSpeed(2.5f); // 1 Attack speed
-            _player.SetLastAttack(0); // Reset attack timer
-            _player.SetInvulnerableTime(0); // Not invulnerable anymore
-            _player.SetGravity(0); // Reset gravity
+            PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(0); // Not a powerup state
+            PlayerStateManager.GetInstance().GetPlayer().SetHp(1); // 1 HP max
+            PlayerStateManager.GetInstance().GetPlayer().SetJump(0); // 0 means that he can fly
+            PlayerStateManager.GetInstance().GetPlayer().SetAttackSpeed(2.5f); // 1 Attack speed
+            PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0); // Reset attack timer
+            PlayerStateManager.GetInstance().GetPlayer().SetInvulnerableTime(0); // Not invulnerable anymore
+            PlayerStateManager.GetInstance().GetPlayer().SetGravity(0); // Reset gravity
 
             _flyingSpeed = 0f;
             _flying = false;
@@ -80,15 +77,14 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
             }
             SetFlyingSpeed(deltaTime);
-            _player.SetScore(_player.GetScore() + 1);
-            _player.SetPositionY(_player.GetPositionY() - _flyingSpeed / 30);
-            _player.SetLastAttack(_player.GetLastAttack() + deltaTime);
+            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(PlayerStateManager.GetInstance().GetPlayer().GetPositionY() - _flyingSpeed / 30);
+            PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(PlayerStateManager.GetInstance().GetPlayer().GetLastAttack() + deltaTime);
         }
 
         private void SetFlyingSpeed(float deltaTime)
         {
             // Reduce fly speed by little when at top or at bottom
-            if (_player.GetPositionY() <= _player._maxHeightPosition)
+            if (PlayerStateManager.GetInstance().GetPlayer().GetPositionY() <= PlayerStateManager.GetInstance().GetPlayer()._maxHeightPosition)
             {
                 // To decrease momentum
                 if (_flyingSpeed > 0)
@@ -101,7 +97,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
                     _flyingSpeed = 0;
                 }
             }
-            else if (_player.GetPositionY() >= _player._minHeightPosition)
+            else if (PlayerStateManager.GetInstance().GetPlayer().GetPositionY() >= PlayerStateManager.GetInstance().GetPlayer()._minHeightPosition)
             {
                 // To decrease momentum
                 if (_flyingSpeed < 0)
@@ -155,25 +151,25 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private void Shoot(Object? sender, KeyEventArgs e)
         {
             if (e.Code != SettingsManager.GetIntances().GetShotKey()) return;
-            if (1 / _player.GetAttackSpeed() > _player.GetLastAttack()) return;
-            _player.SetLastAttack(0);
+            if (1 / PlayerStateManager.GetInstance().GetPlayer().GetAttackSpeed() > PlayerStateManager.GetInstance().GetPlayer().GetLastAttack()) return;
+            PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0);
 
             // Apparition du shoot
-            ShootStateManager.GetInstance().SpawnShoot(_player.GetPositionY());
+            ShootStateManager.GetInstance().SpawnShoot(PlayerStateManager.GetInstance().GetPlayer().GetPositionY());
         }
 
         public override bool CheckCollision()
         {
             foreach (EnemyBaseState enemy in EnemyStateManager.GetInstance().GetEnemies())
             {
-                if (_player.GetPlayerBounds().Intersects(enemy.GetShootHitBox()))
+                if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(enemy.GetShootHitBox()))
                 {
                     return true;
                 }
             }
             foreach (LaserBaseState laser in LaserStateManager.GetInstance().GetLasers())
             {
-                if(_player.GetPlayerBounds().Intersects(laser.GetLaserHitBox()))
+                if(PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(laser.GetLaserHitBox()))
                 {
                     return true;
                 }

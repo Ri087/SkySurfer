@@ -25,6 +25,12 @@ namespace SkySurfer.Assets.Scripts.Entities
             }
             return _instance;
         }
+
+        public void Clear()
+        {
+            _powerUp = null;
+            timeFromLastTransformation = 15;
+        }
         public PowerUpBaseState GetPowerUp()
         {
             return _powerUp;

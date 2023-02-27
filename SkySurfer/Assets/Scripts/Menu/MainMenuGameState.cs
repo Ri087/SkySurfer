@@ -104,20 +104,17 @@ namespace SkySurfer.Assets.Scripts.Menu
             if (e.Code == Keyboard.Key.Enter && selected == 0)
             {
                 Exit();
-                GameStateManager.GetInstance().GetPlayGameBaseState().Exit();
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
                 return;
             }
             if (e.Code == Keyboard.Key.Enter && selected == 1)
             {
                 Exit();
-                GameStateManager.GetInstance().AddState(GameStateManager.GetInstance().GetSettingsGameState());
                 return;
             }
             if (e.Code == Keyboard.Key.Enter && selected == 2)
             {
                 Exit();
-                GameStateManager.GetInstance().AddState(GameStateManager.GetInstance().GetCreditsGameState());
                 return;
             }
             if (e.Code == Keyboard.Key.Enter && selected == 3)
