@@ -14,7 +14,7 @@ namespace SkySurfer.Assets.Scripts.Menu
     class CreditsGameState : GameBaseState
     {
         private Font font = new("../../../Assets/Fonts/Balbek-Personal.otf");
-        private string creditsText = "Hello le monde";
+        private string creditsText = "By Benjou et Jeremoux les bests";
         private int FONT_SIZE = 20;
 
 
@@ -58,18 +58,11 @@ namespace SkySurfer.Assets.Scripts.Menu
         }
         private void QuitCredits(Object? sender, KeyEventArgs e)
         {
-            if (e.Code != SettingsManager.GetIntances().GetMenuBackKey())
-            {
-                return;
-            }
-
             if (e.Code == SettingsManager.GetIntances().GetMenuBackKey())
             {
                 Exit();
                 return;
             }
-
-          
         }
     }
 }
