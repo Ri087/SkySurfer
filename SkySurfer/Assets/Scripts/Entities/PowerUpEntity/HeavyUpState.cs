@@ -15,7 +15,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         {
             _powerUp = new();
         }
-        public PowerUp GetPowerUp()
+        public override PowerUp GetPowerUp()
         {
             return _powerUp;
         }

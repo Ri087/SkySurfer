@@ -119,7 +119,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             }
             if (e.Code == Keyboard.Key.Enter && selected == 3)
             {
-                Console.WriteLine("Quit Game !");
+                SettingsManager.GetIntances().GetWindow().Close();
                 return;
             }
         }

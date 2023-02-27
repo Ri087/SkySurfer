@@ -29,9 +29,6 @@ namespace SkyRunner
                 SettingsManager.GetIntances().GetWindow().Display();
 
                 deltaTime = clock.Restart().AsSeconds();
-
-                // Ferme la fenêtre
-                // window.Close();
             }
         }
     }
