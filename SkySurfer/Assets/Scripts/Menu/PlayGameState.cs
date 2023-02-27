@@ -64,8 +64,11 @@ namespace SkySurfer.Assets.Scripts.Menu
             // Enemies of the game
             EnemyStateManager.GetInstance().DrawEnemies();
 
-            // Player Shoot 
+            // Player Shoot of the game
             ShootStateManager.GetInstance().DrawShoot();
+
+            // Power Up of the game
+            PowerUpStateManager.GetInstance().DrawPowerUp();
         }
 
         public override void Exit()
@@ -100,9 +103,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             LaserStateManager.GetInstance().UpdateLasers(deltaTime, _velocity);
             EnemyStateManager.GetInstance().UpdateEnemies(deltaTime * 1.3f, _velocity);
             ShootStateManager.GetInstance().UpdateShoot(deltaTime, _velocity);
-
-          
-        
+            PowerUpStateManager.GetInstance().UpdatePowerUp(deltaTime, _velocity);        
         }
         private void ScorePrint(string text, Font font)
         {

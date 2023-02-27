@@ -16,14 +16,14 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         public readonly float maxLength = 0.5f;
         public readonly float maxHeightPosition = 0.1f; // Always under roof
         public readonly float minHeightPosition;
-        private FloatRect _EnemyFloatRect;
+        private FloatRect _hitbox;
 
 
         public Laser()
         {
             Random random = new();
             length = (float)random.NextDouble() * (maxLength - minLength) + minLength;
-            minHeightPosition = 0.85f - length / 1.5f;
+            minHeightPosition = 0.9f - length;
             _positionY = (float)random.NextDouble() * (minHeightPosition - maxHeightPosition) + maxHeightPosition;
         }
 
@@ -44,13 +44,13 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         {
             _positionY = positionY;
         }
-        public void SetLaserBounds(RectangleShape enemy)
+        public void SetLaserBounds(RectangleShape hitbox)
         {
-            this._EnemyFloatRect = enemy.GetGlobalBounds();
+            _hitbox = hitbox.GetGlobalBounds();
         }
         public FloatRect GetLaserBounds()
         {
-            return _EnemyFloatRect;
+            return _hitbox;
         }
     }
 }

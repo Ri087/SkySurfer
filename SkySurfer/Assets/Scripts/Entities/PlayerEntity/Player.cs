@@ -17,7 +17,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         private float _invulnerableTime;
         private int _gravity;
         private float _positionY = 0.8f;
-        private FloatRect _playerFloatRect;
+        private FloatRect _hitbox;
         private int _score;
         public readonly float _maxHeightPosition = 0.1f;
         public readonly float _minHeightPosition = 0.8f;
@@ -106,13 +106,13 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
                 return;
             }
         }
-        public void SetPLayeryBounds(RectangleShape player)
+        public void SetPLayeryBounds(RectangleShape hitbox)
         {
-            this._playerFloatRect = player.GetGlobalBounds();
+            this._hitbox = hitbox.GetGlobalBounds();
         }
         public FloatRect GetPlayerBounds()
         {
-            return _playerFloatRect;
+            return _hitbox;
         }
         public void SetScore(int score)
         {
