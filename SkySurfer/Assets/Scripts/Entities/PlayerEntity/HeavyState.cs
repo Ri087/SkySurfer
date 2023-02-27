@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
 using SkySurfer.Assets.Scripts.Entities.LaserEntity;
 using System;
@@ -56,6 +57,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         {
             PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetClassicState());
             PlayerStateManager.GetInstance().GetStates().Peek().Exit();
+            SettingsManager.GetIntances().GetWindow().KeyPressed -= Jump;
         }
 
         public override void HandleInput()
@@ -66,14 +68,22 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public override void Init()
         {
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(15); // Not a powerup state
-            PlayerStateManager.GetInstance().GetPlayer().SetHp(2); // 2 HP max
+            PlayerStateManager.GetInstance().GetPlayer().SetHp(3); // 2 HP max
             PlayerStateManager.GetInstance().GetPlayer().SetAttackSpeed(5); // 5 Attack speed
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0); // Reset attack timer (formula 1/AS)
-            PlayerStateManager.GetInstance().GetPlayer().SetGravity(0); // Reset gravity
+            LaserStateManager.GetInstance().Clear();
+            SettingsManager.GetIntances().GetWindow().KeyPressed += Jump;
         }
 
         public override void Update(float deltaTime, float velocity)
         {
+            if (PlayerStateManager.GetInstance().GetPlayer().GetPositionY() >= PlayerStateManager.GetInstance().GetPlayer()._minHeightPosition)
+            {
+                PlayerStateManager.GetInstance().GetPlayer().SetJump(2);
+            }
+
+            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(PlayerStateManager.GetInstance().GetPlayer().GetPositionY() + deltaTime / 3.5f);
+
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(PlayerStateManager.GetInstance().GetPlayer().GetLastAttack() + deltaTime);
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() - deltaTime);
             if (PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() <= 0)
@@ -89,8 +99,20 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             PlayerStateManager.GetInstance().GetPlayer().SetHp(PlayerStateManager.GetInstance().GetPlayer().GetHp() - 1);
             PlayerStateManager.GetInstance().GetPlayer().SetInvulnerableTime(2);
             if (PlayerStateManager.GetInstance().GetPlayer().GetHp() > 0) return;
+            Exit();
             GameStateManager.GetInstance().GetStates().Peek().Exit();
             GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
+        }
+
+        private void Jump(Object? sender, KeyEventArgs e)
+        {
+            Console.WriteLine("nope");
+            if (e.Code != SettingsManager.GetIntances().GetJumpKey()) return;
+            Console.WriteLine(PlayerStateManager.GetInstance().GetPlayer().GetJump());
+            if (PlayerStateManager.GetInstance().GetPlayer().GetJump() <= 0) return;
+            PlayerStateManager.GetInstance().GetPlayer().SetJump(PlayerStateManager.GetInstance().GetPlayer().GetJump() - 1);
+            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(PlayerStateManager.GetInstance().GetPlayer().GetPositionY() - 0.30f);
+            Console.WriteLine("done");
         }
     }
 }

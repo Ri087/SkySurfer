@@ -16,7 +16,7 @@ namespace SkySurfer.Assets.Scripts.Entities
             new HeavyUpState(),
             new StickyUpState(),
         };
-        private float timeFromLastTransformation = 15;
+        private float timeFromLastTransformation = 0;
         public static PowerUpStateManager GetInstance()
         {
             if (_instance == null)
@@ -29,7 +29,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         public void Clear()
         {
             _powerUp = null;
-            timeFromLastTransformation = 15;
+            timeFromLastTransformation = 0;
         }
         public PowerUpBaseState GetPowerUp()
         {
