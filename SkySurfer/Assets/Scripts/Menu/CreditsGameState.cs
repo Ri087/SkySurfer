@@ -58,12 +58,12 @@ namespace SkySurfer.Assets.Scripts.Menu
         }
         private void QuitCredits(Object? sender, KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Escape)
+            if (e.Code != SettingsManager.GetIntances().GetMenuBackKey())
             {
                 return;
             }
 
-            if (e.Code == Keyboard.Key.Escape)
+            if (e.Code == SettingsManager.GetIntances().GetMenuBackKey())
             {
                 Exit();
                 return;

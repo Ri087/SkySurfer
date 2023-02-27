@@ -125,7 +125,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         private void PauseMenu(Object? sender, KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Escape)
+            if (e.Code != SettingsManager.GetIntances().GetMenuBackKey())
             {
                 return;
             }

@@ -64,7 +64,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         }
         private void QuitPause(Object? sender, KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Escape)
+            if (e.Code != SettingsManager.GetIntances().GetMenuBackKey())
             {
                 return;
             }
@@ -74,45 +74,45 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         private void PauseMenuSelector(Object? sender, KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down && e.Code != Keyboard.Key.Enter)
+            if (e.Code != SettingsManager.GetIntances().GetMenuUpKey() && e.Code != SettingsManager.GetIntances().GetMenuDownKey() && e.Code != SettingsManager.GetIntances().GetMenuConfirmKey())
             {
                 return;
             }
 
-            if (e.Code == Keyboard.Key.Up && selected == 0)
+            if (e.Code == SettingsManager.GetIntances().GetMenuUpKey() && selected == 0)
             {
                 selected = menu.Length - 1;
                 return;
             }
-            if (e.Code == Keyboard.Key.Up && selected > 0)
+            if (e.Code == SettingsManager.GetIntances().GetMenuUpKey() && selected > 0)
             {
                 selected--;
                 return;
             }
-            if (e.Code == Keyboard.Key.Down && selected == menu.Length - 1)
+            if (e.Code == SettingsManager.GetIntances().GetMenuDownKey() && selected == menu.Length - 1)
             {
                 selected = 0;
                 return;
             }
-            if (e.Code == Keyboard.Key.Down && selected < menu.Length - 1)
+            if (e.Code == SettingsManager.GetIntances().GetMenuDownKey() && selected < menu.Length - 1)
             {
                 selected++;
                 return;
             }
-            if (e.Code == Keyboard.Key.Enter && selected == 0)
+            if (e.Code == SettingsManager.GetIntances().GetMenuConfirmKey() && selected == 0)
             {
                 Exit();
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
                 return;
             }
-            if (e.Code == Keyboard.Key.Enter && selected == 1)
+            if (e.Code == SettingsManager.GetIntances().GetMenuConfirmKey() && selected == 1)
             {
                 Exit();
                 GameStateManager.GetInstance().GetPlayGameBaseState().Exit();
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
                 return;
             }
-            if (e.Code == Keyboard.Key.Enter && selected == 2)
+            if (e.Code == SettingsManager.GetIntances().GetMenuConfirmKey() && selected == 2)
             {
                 Exit();
                 GameStateManager.GetInstance().GetPlayGameBaseState().Exit();

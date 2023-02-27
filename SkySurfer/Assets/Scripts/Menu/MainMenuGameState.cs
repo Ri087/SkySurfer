@@ -76,7 +76,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         }
         private void MenuSelector(Object? sender , KeyEventArgs e)
         {
-            if (e.Code != Keyboard.Key.Up && e.Code != Keyboard.Key.Down && e.Code != Keyboard.Key.Enter)
+            if (e.Code != Keyboard.Key.Up && e.Code != SettingsManager.GetIntances().GetMenuDownKey() && e.Code != Keyboard.Key.Enter)
             {
                 return;
             }
@@ -91,12 +91,12 @@ namespace SkySurfer.Assets.Scripts.Menu
                 selected--;
                 return;
             }
-            if (e.Code == Keyboard.Key.Down && selected == menu.Length - 1)
+            if (e.Code == SettingsManager.GetIntances().GetMenuDownKey() && selected == menu.Length - 1)
             {
                 selected = 0;
                 return;
             }
-            if (e.Code == Keyboard.Key.Down && selected < menu.Length - 1)
+            if (e.Code == SettingsManager.GetIntances().GetMenuDownKey() && selected < menu.Length - 1)
             {
                 selected++;
                 return;

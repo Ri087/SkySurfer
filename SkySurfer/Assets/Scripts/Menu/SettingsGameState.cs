@@ -31,7 +31,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Init()
         {
-            Console.WriteLine("Setting menu init");
+
         }
 
         public override void Update(float deltaTime)
