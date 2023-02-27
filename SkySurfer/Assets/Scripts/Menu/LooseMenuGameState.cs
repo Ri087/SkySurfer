@@ -76,7 +76,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         }
         private void ScorePrint(float windowX, float windowY)
         {
-            Text scoreText = new(score + Math.Floor(PlayerStateManager.GetInstance().GetPlayer().GetScore()), font, 60);
+            Text scoreText = new(score + Math.Floor(PlayerStateManager.GetInstance().GetPlayer().GetScore()).ToString(), font, 60);
             scoreText.Position = new(windowX * 0.15f, windowY * 0.10f);
             scoreText.FillColor = Color.Red;
             SettingsManager.GetIntances().GetWindow().Draw(scoreText);
