@@ -49,16 +49,7 @@ namespace SkySurfer.Assets.Scripts.Entities
                 if (_enemies.First().CheckIfOut())
                 {
                     _enemies.Remove(_enemies.First());
-                }
-                foreach(EnemyBaseState enemy in _enemies)
-                {
-                    if (enemy.CheckColision())
-                    {
-                        GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
-                        return;
-                   }
-
-                }
+                }  
             }
         }
 

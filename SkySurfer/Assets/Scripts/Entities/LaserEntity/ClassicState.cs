@@ -63,10 +63,11 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         {
             _laser.SetPositionX(_laser.GetPositionX() - deltaTime * velocity /5);
         }
-        public override bool CheckColision()
+    
+
+        public override FloatRect GetLaserHitBox()
         {
-            // detection collision entre laser et joueur
-            return _laser.GetLaserBounds().Intersects(PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds());
+           return _laser.GetLaserBounds();
         }
     }
 }

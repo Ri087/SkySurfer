@@ -71,7 +71,7 @@ namespace SkySurfer.Assets.Scripts.Entities.ShootEntity
             // detection collision entre shoot et enemy
             foreach(EnemyBaseState enemy in EnemyStateManager.GetInstance().GetEnemies())
             {
-                return _shoot.GetShootBounds().Intersects(enemy.CheckShootColision());
+                return _shoot.GetShootBounds().Intersects(enemy.GetShootHitBox());
             }
             return false;
         }

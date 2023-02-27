@@ -17,8 +17,7 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
         public abstract void Draw();
         public abstract void HandleInput();
         public abstract bool CheckIfOut();
-        public abstract bool CheckColision();
-        public abstract FloatRect CheckShootColision();
+        public abstract FloatRect GetShootHitBox();
 
 
 

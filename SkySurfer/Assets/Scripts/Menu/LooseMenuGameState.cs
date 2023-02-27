@@ -112,8 +112,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             }
             if (e.Code == Keyboard.Key.Enter && selected == 0)
             {
-                Exit();
-                GameStateManager.GetInstance().GetPlayGameBaseState().Exit();
+                GameStateManager.GetInstance().GetStates().Peek().Exit();
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
                 return;
             }

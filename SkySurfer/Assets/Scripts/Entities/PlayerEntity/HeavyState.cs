@@ -11,6 +11,12 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
     class HeavyState : PlayerBaseState
     {
         private Player _player;
+
+        public override bool CheckCollision()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Cleanup()
         {
 

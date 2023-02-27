@@ -52,16 +52,7 @@ namespace SkySurfer.Assets.Scripts.Entities
                 {
                     _lasers.Remove(_lasers.First());
                 }
-                foreach (LaserBaseState laser in _lasers)
-                {
-                    if (laser.CheckColision())
-                    { 
-                        GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
-                    }
-                }
-            }
-
-            
+            }  
         }
 
         public void SpawnNewLaser(float deltaTime, float velocity)

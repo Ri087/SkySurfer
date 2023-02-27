@@ -61,13 +61,7 @@ namespace SkySurfer.Assets.Scripts.Entities.EnemyEntity
             _enemy.SetPositionX(_enemy.GetPositionX() - deltaTime * velocity / 5);
          }
         
-        public override bool CheckColision()
-        {
-            // detection collision entre ennemi et joueur
-            return _enemy.GetEnemyBounds().Intersects(PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds());
-        }
-
-        public override FloatRect CheckShootColision()
+        public override FloatRect GetShootHitBox()
         {
             return _enemy.GetEnemyBounds();
         }
