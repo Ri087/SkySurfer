@@ -61,6 +61,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             if (e.Code == SettingsManager.GetIntances().GetMenuBackKey())
             {
                 Exit();
+                GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetMainMenuGameState());
                 return;
             }
         }
