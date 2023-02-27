@@ -52,6 +52,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
             if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(_powerUp.GetPowerUpBounds()))
             {
                 _powerUp.SetPositionX(-0.25f);
+                PlayerStateManager.GetInstance().GetStates().Peek().Exit();
                 PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetStickyState());
                 return;
             }

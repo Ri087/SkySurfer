@@ -43,6 +43,7 @@ namespace SkySurfer.Assets.Scripts.Menu
         public override void Exit()
         {
             PlayerStateManager.GetInstance().GetPlayer().SetScore(0);
+            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(0.8f);
             SettingsManager.GetIntances().GetWindow().KeyPressed -= LooseMenuSelector;
         }
 

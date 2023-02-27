@@ -40,7 +40,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         }
         public void UpdateEnemies(float deltaTime, float velocity)
         {
-            if (PlayerStateManager.GetInstance().GetStates().Peek() != PlayerStateManager.GetInstance().GetClassicState()) return;
+            if (PlayerStateManager.GetInstance().GetStates().Peek() == PlayerStateManager.GetInstance().GetStickyState()) return;
             SpawnNewEnemy(deltaTime, velocity);
 
             foreach (EnemyBaseState enemy in _enemies)

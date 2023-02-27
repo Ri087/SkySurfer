@@ -44,8 +44,6 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             SettingsManager.GetIntances().GetWindow().KeyPressed -= Shoot;
             SettingsManager.GetIntances().GetWindow().KeyPressed -= Flying;
             SettingsManager.GetIntances().GetWindow().KeyReleased -= NotFlying;
-
-            PlayerStateManager.GetInstance().GetPlayer().SetPositionY(0.8f);
         }
         public override void HandleInput()
         {
@@ -64,7 +62,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             PlayerStateManager.GetInstance().GetPlayer().SetAttackSpeed(2.5f); // 1 Attack speed
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0); // Reset attack timer
             PlayerStateManager.GetInstance().GetPlayer().SetInvulnerableTime(0); // Not invulnerable anymore
-            PlayerStateManager.GetInstance().GetPlayer().SetGravity(0); // Reset gravity
+            PlayerStateManager.GetInstance().GetPlayer().SetGravity(1); // Reset gravity
 
             _flyingSpeed = 0f;
             _flying = false;
