@@ -1,4 +1,5 @@
-﻿using SkySurfer.Assets.Scripts.Entities.PlayerEntity;
+﻿using SFML.Graphics;
+using SkySurfer.Assets.Scripts.Entities.PlayerEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         public abstract void Draw();
         public abstract PowerUp GetPowerUp();
         public abstract bool CheckIfOut();
+        public abstract void CheckPowerUpCollision();
+
     }
 }

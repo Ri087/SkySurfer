@@ -38,6 +38,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             RectangleShape player = new(new Vector2f(windowX * 0.06f, windowY * 0.1f));
             player.FillColor = Color.Green;
             player.Position = new(windowX * 0.1f, windowY * PlayerStateManager.GetInstance().GetPlayer().GetPositionY());
+            
             SettingsManager.GetIntances().GetWindow().Draw(player);
         }
 

@@ -30,11 +30,11 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         {
             return _positionX;
         }
-        public void SetPLayeryBounds(RectangleShape hitbox)
+        public void SetPowerUpBounds(RectangleShape hitbox)
         {
             this._hitbox = hitbox.GetGlobalBounds();
         }
-        public FloatRect GetPlayerBounds()
+        public FloatRect GetPowerUpBounds()
         {
             return _hitbox;
         }

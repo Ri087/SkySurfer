@@ -30,8 +30,11 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
 
             RectangleShape powerUp = new(new Vector2f(windowX * _powerUp.length, windowY * _powerUp.length));
 
+
             powerUp.Position = new Vector2f(windowX * _powerUp.GetPositionX(), windowY * _powerUp._positionY);
             powerUp.FillColor = Color.Black;
+
+            _powerUp.SetPowerUpBounds(powerUp);
 
             SettingsManager.GetIntances().GetWindow().Draw(powerUp);
         }
@@ -41,7 +44,17 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         }
         public override void Update(float deltaTime, float velocity)
         {
+            CheckPowerUpCollision();
             _powerUp.SetPositionX(_powerUp.GetPositionX() - deltaTime * velocity / 5);
+        }
+        public override void CheckPowerUpCollision()
+        {
+            if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(_powerUp.GetPowerUpBounds()))
+            {
+               _powerUp.SetPositionX(-0.25f);
+                PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetHeavyState());
+                return;
+            }
         }
     }
 }

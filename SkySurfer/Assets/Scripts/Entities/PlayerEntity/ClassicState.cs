@@ -3,6 +3,7 @@ using SFML.System;
 using SFML.Window;
 using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
 using SkySurfer.Assets.Scripts.Entities.LaserEntity;
+using SkySurfer.Assets.Scripts.Entities.PowerUpEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,6 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
 
         public override void Init()
         {
-            Console.Write("hello world");
             // Event
             SettingsManager.GetIntances().GetWindow().KeyPressed += Shoot;
             SettingsManager.GetIntances().GetWindow().KeyPressed += Flying;
@@ -176,5 +176,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             }
             return false;
         }
+
+   
     }    
 }
