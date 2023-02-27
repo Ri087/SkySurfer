@@ -116,6 +116,7 @@ namespace SkySurfer.Assets.Scripts.Menu
             if (e.Code == SettingsManager.GetIntances().GetMenuConfirmKey() && selected == 2)
             {
                 Exit();
+                GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetCreditsGameState());
                 return;
             }
             if (e.Code == SettingsManager.GetIntances().GetMenuConfirmKey() && selected == 3)
