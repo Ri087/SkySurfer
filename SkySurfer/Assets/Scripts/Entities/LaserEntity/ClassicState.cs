@@ -38,7 +38,7 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         }
         public override void Update(float deltaTime, float velocity)
         {
-            _laser.SetPositionX(_laser.GetPositionX() - deltaTime * velocity /5);
+            _laser.SetPositionX(_laser.GetPositionX() - deltaTime * velocity / 4);
         }
         public override FloatRect GetLaserHitBox()
         {

@@ -42,6 +42,7 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Exit()
         {
+            PlayerStateManager.GetInstance().GetPlayer().SetScore(0);
             SettingsManager.GetIntances().GetWindow().KeyPressed -= LooseMenuSelector;
         }
 
@@ -80,8 +81,6 @@ namespace SkySurfer.Assets.Scripts.Menu
             scoreText.Position = new(windowX * 0.15f, windowY * 0.10f);
             scoreText.FillColor = Color.Red;
             SettingsManager.GetIntances().GetWindow().Draw(scoreText);
-
-
         }
         private void LooseMenuSelector(Object? sender, KeyEventArgs e)
         {

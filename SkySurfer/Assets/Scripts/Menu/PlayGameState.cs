@@ -98,9 +98,9 @@ namespace SkySurfer.Assets.Scripts.Menu
 
         public override void Update(float deltaTime)
         {
-            if (_velocity < 5)
+            if (_velocity < 4f)
             {
-                _velocity += deltaTime / 45;
+                _velocity += deltaTime / 30;
             }
             PlayerStateManager.GetInstance().GetStates().Peek().Update(deltaTime, _velocity);
             LaserStateManager.GetInstance().UpdateLasers(deltaTime, _velocity);
@@ -129,7 +129,6 @@ namespace SkySurfer.Assets.Scripts.Menu
             {
                 return;
             }
-            Console.WriteLine("lol");
             Pause();
         }
     }

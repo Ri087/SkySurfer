@@ -12,7 +12,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         private static EnemyStateManager _instance = new();
         private List<EnemyBaseState> _enemies = new List<EnemyBaseState>();
         private float _timeFromLastEnemy = 1;
-        private float _timeBetweenEnemy = 3;
+        private float _timeBetweenEnemy = 2f;
         public static EnemyStateManager GetInstance()
         {
             if (_instance == null)
@@ -24,8 +24,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         public void Clear()
         {
             _enemies.Clear();
-            _timeFromLastEnemy = 2.5f;
-            _timeBetweenEnemy = 12f;
+            _timeFromLastEnemy = 1;
         }
         public List<EnemyBaseState> GetEnemies()
         {

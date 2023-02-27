@@ -12,8 +12,8 @@ namespace SkySurfer.Assets.Scripts.Entities.LaserEntity
         private float _positionX = 1.25f;
         private float _positionY;
         public readonly float length;
-        public readonly float minLength = 0.25f;
-        public readonly float maxLength = 0.5f;
+        public readonly float minLength = 0.15f;
+        public readonly float maxLength = 0.4f;
         public readonly float maxHeightPosition = 0.1f; // Always under roof
         public readonly float minHeightPosition;
         private FloatRect _hitbox;

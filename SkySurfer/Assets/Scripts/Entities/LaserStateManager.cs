@@ -11,8 +11,8 @@ namespace SkySurfer.Assets.Scripts.Entities
     {
         private static LaserStateManager _instance = new();
         private List<LaserBaseState> _lasers = new List<LaserBaseState>();
-        private float _timeFromLastLaser = 2.5f;
-        private float _timeBetweenLaser = 3.5f;
+        private float _timeFromLastLaser = 1.5f;
+        private float _timeBetweenLaser = 2.5f;
 
         public static LaserStateManager GetInstance()
         {
@@ -26,8 +26,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         public void Clear()
         {
             _lasers.Clear();
-            _timeFromLastLaser = 2.5f;
-            _timeBetweenLaser = 3.5f;
+            _timeFromLastLaser = 1.5f;
         }
         public List<LaserBaseState> GetLasers()
         {
