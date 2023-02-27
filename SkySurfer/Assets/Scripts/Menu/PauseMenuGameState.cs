@@ -18,7 +18,8 @@ namespace SkySurfer.Assets.Scripts.Menu
 
             {
                 new(text: "Resume", x: 0.15f, y: 0.10f),
-                new(text: "Quit Game", x: 0.15f, y: 0.25f),
+                new(text: "Restart", x: 0.15f, y: 0.25f),
+                new(text: "Quit Game", x: 0.15f, y: 0.40f),
 
             };
         public override void Cleanup()
@@ -105,6 +106,13 @@ namespace SkySurfer.Assets.Scripts.Menu
                 return;
             }
             if (e.Code == Keyboard.Key.Enter && selected == 1)
+            {
+                Exit();
+                GameStateManager.GetInstance().GetPlayGameBaseState().Exit();
+                GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetPlayGameBaseState());
+                return;
+            }
+            if (e.Code == Keyboard.Key.Enter && selected == 2)
             {
                 Exit();
                 GameStateManager.GetInstance().GetPlayGameBaseState().Exit();
