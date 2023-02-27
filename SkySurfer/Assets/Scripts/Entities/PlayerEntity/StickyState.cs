@@ -1,5 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
+using SkySurfer.Assets.Scripts.Entities.LaserEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,13 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
     {
         public override bool CheckCollision()
         {
+            foreach (LaserBaseState laser in LaserStateManager.GetInstance().GetLasers())
+            {
+                if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(laser.GetLaserHitBox()))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -46,6 +55,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public override void Init()
         {
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(15); // Not a powerup state
+            EnemyStateManager.GetInstance().Clear(); // Remove every enemy
         }
 
         public override void Update(float deltaTime, float velocity)
@@ -53,8 +63,11 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() - deltaTime);
             if (PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() <= 0)
             {
-                // Switch states
+                PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetClassicState());
             }
+            if (!CheckCollision()) return;
+            GameStateManager.GetInstance().GetStates().Peek().Exit();
+            GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState()); 
         }
     }
 }

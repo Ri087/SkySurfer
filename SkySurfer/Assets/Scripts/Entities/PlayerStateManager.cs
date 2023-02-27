@@ -18,7 +18,7 @@ namespace SkySurfer.Assets.Scripts.Entities
         private Stack<PlayerBaseState> _states = new();
         public PlayerStateManager()
         {
-            _states.Push(_classicState);
+            _states.Push(_heavyState);
         }
 
         public static PlayerStateManager GetInstance()

@@ -15,6 +15,10 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         {
             _powerUp = new();
         }
+        public PowerUp GetPowerUp()
+        {
+            return _powerUp;
+        }
         public override bool CheckIfOut()
         {
             return _powerUp.GetPositionX() < -0.25f;

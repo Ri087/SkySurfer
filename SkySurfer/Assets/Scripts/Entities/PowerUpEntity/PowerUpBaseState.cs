@@ -12,6 +12,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PowerUpEntity
         public abstract void Init();
         public abstract void Update(float deltaTime, float velocity);
         public abstract void Draw();
+        public abstract PowerUp GetPowerUp();
         public abstract bool CheckIfOut();
     }
 }

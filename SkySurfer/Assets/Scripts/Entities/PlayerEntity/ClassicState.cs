@@ -75,7 +75,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             {
                 GameStateManager.GetInstance().GetStates().Peek().Exit();           
                 GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
-            }
+            }            
             SetFlyingSpeed(deltaTime);
             PlayerStateManager.GetInstance().GetPlayer().SetPositionY(PlayerStateManager.GetInstance().GetPlayer().GetPositionY() - _flyingSpeed / 30);
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(PlayerStateManager.GetInstance().GetPlayer().GetLastAttack() + deltaTime);

@@ -1,5 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SkySurfer.Assets.Scripts.Entities.EnemyEntity;
+using SkySurfer.Assets.Scripts.Entities.LaserEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,21 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
     {
         public override bool CheckCollision()
         {
-            return false;   
+            foreach (EnemyBaseState enemy in EnemyStateManager.GetInstance().GetEnemies())
+            {
+                if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(enemy.GetShootHitBox()))
+                {
+                    return true;
+                }
+            }
+            foreach (LaserBaseState laser in LaserStateManager.GetInstance().GetLasers())
+            {
+                if (PlayerStateManager.GetInstance().GetPlayer().GetPlayerBounds().Intersects(laser.GetLaserHitBox()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void Cleanup()
@@ -46,8 +62,8 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
         public override void Init()
         {
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(15); // Not a powerup state
-            PlayerStateManager.GetInstance().GetPlayer().SetHp(2); // 1 HP max
-            PlayerStateManager.GetInstance().GetPlayer().SetAttackSpeed(1.5f); // 1 Attack speed
+            PlayerStateManager.GetInstance().GetPlayer().SetHp(2); // 2 HP max
+            PlayerStateManager.GetInstance().GetPlayer().SetAttackSpeed(5); // 5 Attack speed
             PlayerStateManager.GetInstance().GetPlayer().SetLastAttack(0); // Reset attack timer (formula 1/AS)
             PlayerStateManager.GetInstance().GetPlayer().SetGravity(0); // Reset gravity
         }
@@ -58,8 +74,19 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             PlayerStateManager.GetInstance().GetPlayer().SetPowerUpTime(PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() - deltaTime);
             if (PlayerStateManager.GetInstance().GetPlayer().GetPowerUpTime() <= 0)
             {
-                // Switch states
+                PlayerStateManager.GetInstance().SwitchState(PlayerStateManager.GetInstance().GetClassicState());
             }
+
+            PlayerStateManager.GetInstance().GetPlayer().SetInvulnerableTime(PlayerStateManager.GetInstance().GetPlayer().GetInvulnerableTime() - deltaTime);
+
+            // Check if player is invulnerable, get collision, has enough hp to survive
+            if (PlayerStateManager.GetInstance().GetPlayer().GetInvulnerableTime() > 0) return;
+            if (!CheckCollision()) return;
+            PlayerStateManager.GetInstance().GetPlayer().SetHp(PlayerStateManager.GetInstance().GetPlayer().GetHp() - 1);
+            PlayerStateManager.GetInstance().GetPlayer().SetInvulnerableTime(2);
+            if (PlayerStateManager.GetInstance().GetPlayer().GetHp() > 0) return;
+            GameStateManager.GetInstance().GetStates().Peek().Exit();
+            GameStateManager.GetInstance().SwitchState(GameStateManager.GetInstance().GetLooseMenuGameState());
         }
     }
 }

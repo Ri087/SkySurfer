@@ -31,7 +31,7 @@ namespace SkySurfer.Assets.Scripts.Entities.PlayerEntity
             _powerUpTime = time;
         }
 
-        public float GetHp()
+        public int GetHp()
         {
             return _hp;
         }
